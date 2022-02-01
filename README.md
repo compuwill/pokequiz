@@ -18,3 +18,15 @@ https://developer.ebay.com/products/commerce
 
 # CSS Framework
 Bulma https://bulma.io/
+
+# Quiz Structure (Determine what kind of pokemon are you based on these answers):
+40-50 Questions (10-15 shown at a time when starting up the quiz)
+  - Multiple Choice Answers - 3-5 Questions
+Randomized
+  - Answers selected will link to final results
+  - Show images of randomized pokemon according to each attribute by selected answrrs
+No Timer
+Music - 
+  - Main Gym Trainer Theme (To be played when participants are taking the quiz)
+  - Battle Completion Theme (To be played once the quiz has finished. 
+     - Add themes as a continuous loop while the quiz is active.
