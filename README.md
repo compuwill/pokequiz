@@ -7,3 +7,6 @@ https://pokeapi.co/
 
 Ebay Commerce API
 https://developer.ebay.com/products/commerce
+
+User Story:
+As a top rated gym leader it is my mission to determine which pokemon I would be in the wild based on my answers given by taking the pokeDEX.
