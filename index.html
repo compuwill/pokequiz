@@ -11,22 +11,45 @@
 
 
 <body>
-     <!-- navigation -->
-  <header>
-    <h1>
-      <a href="/">
-        Poke Quiz
-      </a>
-    </h1>
+    <!-- navigation -->
+    <header>
+        <h1>
+            <a href="/">
+                Poke Quiz
+            </a>
+        </h1>
 
-
-    
 
         <audio autoplay="autoplay" controls="controls">
-            <source src="./assets/audio/Pokemon Red, Yellow, Blue Battle Music- Trainer_360P - Copy.mp4" />     
+            <source src="./assets/audio/Pokemon Red, Yellow, Blue Battle Music- Trainer_360P - Copy.mp4" />
         </audio>
+    </header>
 
-    
+
+
+    <div id="startContainer">
+        <h1 class="page-title">Poke Quiz</h1>
+        <form id="task-form">
+            <div class="form-group">
+                <input type="text" name="player-name" placeholder="Enter Player Name" id="userName" />
+            </div>
+            <div class="form-group">
+                <button class="btn" id="start" type="submit">Start</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="questionContainer" class="hide">
+        <h2 id="question"></h2>
+        <div id="answers"></div>
+    </div>
+
+    <div id="endQuiz" class="hide">
+        <h2>End Quiz</h2>
+        <p>You Final Score Is: <span id="points"></span></p>
+        <button id="submit">End</button>
+    </div>
     <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
