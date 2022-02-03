@@ -54,22 +54,22 @@ var questions = [
         ]
     },
     {
-        question: "Which country would you rather travel to?",
+        question: "Which would you rather eat?",
         answers: [{
-            answer: "The Bahamas",
-            points: [{ "water": 1, "normal": 1, "fire": 1 }]
+            answer: "Ice cream",
+            points: [{ "water": 1, "normal": 1}]
         },
         {
-            answer: "Japan",
-            points: [{ "fighting": 1, "rock": 1, "ground": 1 }]
+            answer: "Cheeseburger",
+            points: [{ "fire": 1, "normal": 1, "ground": 1 }]
         },
         {
-            answer: "New Zealand",
-            points: [{ "grass": 1, "ground": 1 }]
+            answer: "French Fries",
+            points: [{ "fire": 1, "ground": 1 }]
         },
         {
-            answer: "Mexico",
-            points: [{ "fire": 2 }]
+            answer: "Spaghetti & Meatballs",
+            points: [{ "psychic": 2 }]
         }
         ]
     },
@@ -402,7 +402,7 @@ var answerQuestion = function (answerIndex, answersArray) {
 
 
 // A bunch of tests on pulling data from the array
-console.log("QUESTION 1:" + questions[1].question);
+console.log("QUESTION 1:" + questions[17].question);
 
 answerQuestion(1, questions[0].answers)
 answerQuestion(1, questions[1].answers)
