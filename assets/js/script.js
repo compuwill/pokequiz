@@ -1,3 +1,11 @@
+// Use a CSS framework other than Bootstrap.
+// Be deployed to GitHub Pages.
+// Be interactive (i.e., accept and respond to user input).
+// Use at least two server-side APIs.
+// Does not use alerts, confirms, or prompts (use modals).
+// Use client-side storage to store persistent data.
+// Be responsive.
+// Have a polished UI.
 
 //Music Preload
 var audMusic = new Audio('./assets/audio/Pokemon Red, Yellow, Blue Battle Music- Trainer_360P - Copy.mp4')
