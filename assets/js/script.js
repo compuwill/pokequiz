@@ -9,6 +9,12 @@ var fire = 0;
 var fighting = 0;
 var grass = 0;
 var flying = 0;
+var psychic = 0;
+var rock = 0;
+var ground = 0;
+var normal = 0;
+var electric = 0;
+
 
 console.log("test");
 
@@ -375,8 +381,8 @@ var questions = [
                 points: [{ "normal": 1 }]
             },
             {
-                answer: "Staying in bed watching TV",
-                points: [{ "water": 1 }]
+                answer: "Picnic",
+                points: [{ "ground": 1, "grass": 1 }]
             },
             {
                 answer: "Flying to another country",
