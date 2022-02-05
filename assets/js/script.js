@@ -401,7 +401,280 @@ var questions = [
                 points: [{ "electric": 1 }]
             }
         ]
-    }
+    },
+    {
+        question: "Pick a color?",
+        answers: [
+            {
+                answer: "Blue",
+                points: [{ "normal": 1 }]
+            },
+            {
+                answer: "Red",
+                points: [{ "psychic": 1 }]
+            },
+            {
+                answer: "Green",
+                points: [{ "electric": 1 }]
+            },
+            {
+                answer: "Purple",
+                points: [{ "fire": 1 }]
+            }
+        ]
+    },
+ {
+        question: "If you could start over, which profession would you choose?",
+        answers: [
+            {
+                answer: "Psychologist",
+                points: [{ "normal": 1 }]
+            },
+            {
+                answer: "Developer",
+                points: [{ "psychic": 1 }]
+            },
+            {
+                answer: "Lawyer",
+                points: [{ "electric": 1 }]
+            },
+            {
+                answer: "Doctor",
+                points: [{ "fire": 1 }]
+            }
+        ]
+    },
+ {
+        question: "Your personality is?",
+        answers: [
+            {
+                answer: "Calm and Collected",
+                points: [{ "normal": 1 }]
+            },
+            {
+                answer: "Anxious",
+                points: [{ "psychic": 1 }]
+            },
+            {
+                answer: "Outgoing",
+                points: [{ "electric": 1 }]
+            },
+            {
+                answer: "Aloft",
+                points: [{ "fire": 1 }]
+            }
+        ]
+    },
+ {
+        question: "Favorite family member?",
+        answers: [
+            {
+                answer: "Mother",
+                points: [{ "normal": 1 }]
+            },
+            {
+                answer: "Father",
+                points: [{ "psychic": 1 }]
+            },
+            {
+                answer: "Brother/Sister",
+                points: [{ "electric": 1 }]
+            },
+            {
+                answer: "Grandma/Grandpa",
+                points: [{ "fire": 1 }]
+            }
+        ]
+    },
+ {
+        question: "Favorite kind of pizza?",
+        answers: [
+            {
+                answer: "Cheese",
+                points: [{ "normal": 1 }]
+            },
+            {
+                answer: "Pepperoni",
+                points: [{ "psychic": 1 }]
+            },
+            {
+                answer: "Veggie",
+                points: [{ "electric": 1 }]
+            },
+            {
+                answer: "Meat-lover",
+                points: [{ "fire": 1 }]
+            }
+        ]
+    },
+ {
+        question: "Favorite type of car?",
+        answers: [
+            {
+                answer: "Coupe",
+                points: [{ "normal": 1 }]
+            },
+            {
+                answer: "SUV",
+                points: [{ "psychic": 1 }]
+            },
+            {
+                answer: "Sedan",
+                points: [{ "electric": 1 }]
+            },
+            {
+                answer: "Soccer mom",
+                points: [{ "fire": 1 }]
+            }
+        ]
+    },
+ {
+        question: "Favorite sport?",
+        answers: [
+            {
+                answer: "Basketball",
+                points: [{ "normal": 1 }]
+            },
+            {
+                answer: "Football",
+                points: [{ "psychic": 1 }]
+            },
+            {
+                answer: "Boxing",
+                points: [{ "electric": 1 }]
+            },
+            {
+                answer: "Soccer",
+                points: [{ "fire": 1 }]
+            }
+        ]
+    },
+ {
+        question: "What would be your perfect date would be?",
+        answers: [
+            {
+                answer: "Standing in a parking lot talking and looking bored and complicated.",
+                points: [{ "normal": 1 }]
+            },
+            {
+                answer: "A movie and ice cream. Classic.",
+                points: [{ "psychic": 1 }]
+            },
+            {
+                answer: "Going out on a hike.",
+                points: [{ "electric": 1 }]
+            },
+            {
+                answer: "Go out to dinner.",
+                points: [{ "fire": 1 }]
+            }
+        ]
+    },
+ {
+        question: "What’s your favorite school subject?",
+        answers: [
+            {
+                answer: "Math",
+                points: [{ "normal": 1 }]
+            },
+            {
+                answer: "Social studies",
+                points: [{ "psychic": 1 }]
+            },
+            {
+                answer: "Science",
+                points: [{ "electric": 1 }]
+            },
+            {
+                answer: "P.E.",
+                points: [{ "fire": 1 }]
+            }
+        ]
+    },
+ {
+        question: "What do you value most?",
+        answers: [
+            {
+                answer: "Adventure",
+                points: [{ "normal": 1 }]
+            },
+            {
+                answer: "Relaxation",
+                points: [{ "psychic": 1 }]
+            },
+            {
+                answer: "Knowledge",
+                points: [{ "electric": 1 }]
+            },
+            {
+                answer: "Power",
+                points: [{ "fire": 1 }]
+            }
+        ]
+    },
+ {
+        question: "What’s one thing you can’t leave the house without?",
+        answers: [
+            {
+                answer: "Phone",
+                points: [{ "normal": 1 }]
+            },
+            {
+                answer: "Wallet/purse",
+                points: [{ "psychic": 1 }]
+            },
+            {
+                answer: "Glasses",
+                points: [{ "electric": 1 }]
+            },
+            {
+                answer: "Headphones",
+                points: [{ "fire": 1 }]
+            }
+        ]
+    },
+ {
+        question: "What’s your favorite season?",
+        answers: [
+            {
+                answer: "Spring",
+                points: [{ "normal": 1 }]
+            },
+            {
+                answer: "Winter",
+                points: [{ "psychic": 1 }]
+            },
+            {
+                answer: "Summer",
+                points: [{ "electric": 1 }]
+            },
+            {
+                answer: "Fall",
+                points: [{ "fire": 1 }]
+            }
+        ]
+    },
+ {
+        question: "Favorite type of music?",
+        answers: [
+            {
+                answer: "Hip hop",
+                points: [{ "normal": 1 }]
+            },
+            {
+                answer: "Rock",
+                points: [{ "psychic": 1 }]
+            },
+            {
+                answer: "Country",
+                points: [{ "electric": 1 }]
+            },
+            {
+                answer: "Pop",
+                points: [{ "fire": 1 }]
+            }
+          ]
+       },
 ]
 
 //run this whenever you need to delegate points
