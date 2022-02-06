@@ -704,7 +704,7 @@ var questions = [
     },
 ]
 
-//Load a random question
+//function that loads a random question
 var loadRandomQuestion = function () {
     //use the helper function to get a number
     var num = getRandomIntInclusive(0, questions.length - 1)
@@ -720,8 +720,6 @@ var loadRandomQuestion = function () {
     $("#btn-2").text(questions[num].answers[1].answer)
     $("#btn-3").text(questions[num].answers[2].answer)
     $("#btn-4").text(questions[num].answers[3].answer)
-
-
 }
 
 //helper function that gets a random integer between two numbers
@@ -731,8 +729,9 @@ function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 }
 
-//when the start button is clicked
+//when the start button is clicked do this stuff
 $("#start").on("click", function (e) {
+
     //prevent form submission
     e.preventDefault();
 
@@ -768,7 +767,7 @@ $("#start").on("click", function (e) {
     audMusic.currentTime = 1;
     audMusic.play();
 
-    //Load a random question
+    //run the loadRandomQuestion function
     loadRandomQuestion();
 })
 
@@ -780,33 +779,31 @@ questionContainer.on("click", "button", function (e) {
     //get which answer we picked
     var ans = this.getAttribute("data-answer");
 
+    //log out which question was clicked and what answer was picked
     console.log("Quesiton " + num + " Answer: " + ans)
 
     //play the damage noise
     audDamage.currentTime = 0;
     audDamage.play()
 
-
-
-    //add the points by looping through that questions answers
+    //add the points to playerInfo by looping through the answer's points types
     questions[num].answers[ans - 1].points.forEach(element => {
         Object.keys(element).forEach(key => {
-            console.log(key + "+" + element[key]);
+            console.log(key + "+" + element[key]); //print out what element had what amount of points added to it.
             playerInfo.typePoints[key] += element[key];
         })
-
     });
 
-    //print the type points so we as developers can see what our points are at
+    //print the type points so we can see what our points are at
     console.log(playerInfo.typePoints);
 
-    //load another random question
+    //load another random question if we have done less than 10 questions
     if (playerInfo.questionNum < 10) {
         loadRandomQuestion();
         //increment the questionNum
         playerInfo.questionNum++;
     }
-    else //we've answered 10 questions end the quiz
+    else //once we've answered 10 questions end the quiz
     {
         //stop the music
         audMusic.pause();
@@ -814,15 +811,16 @@ questionContainer.on("click", "button", function (e) {
         questionContainer.detach();
         //add the end container
         mainWindow.append(endContainer);
-        //check what type of pokemon
+        //run the checkType function (see below)
         checkType();
     }
 
 })
 
 
+// function that checks which type has the most points
 var checkType = function () {
-    //declare the defaults
+    //declare the variables and their defaults
     var type = "normal";
     var maxPoints = 0;
 
@@ -834,21 +832,19 @@ var checkType = function () {
             type = key;
         }
     })
+    //set the type.text on the page
     $("#type").text(type);
-    console.log(type);
-    console.log($("#type"));
 }
 
-//when the end button is clicked
+//set up what happens when the end button is clicked
 $("#end").on("click", function (e) {
     //remove the end quiz container
     endContainer.detach();
     //add back in the start container
     mainWindow.append(startContainer);
-
 })
 
 
-//Remove all other containers
+//Remove all other containers in the beginning (detach does not remove assignments)
 questionContainer.detach();
 endContainer.detach();
