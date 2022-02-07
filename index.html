@@ -21,7 +21,7 @@
     </header>
 
     <!-- Main Container -->
-    <main class="container">
+    <main class="container" id="#mainWindow">
 
         <!-- Start Box -->
         <div id="startContainer" class="box content ">
@@ -49,10 +49,10 @@
         </div>
 
         <!-- End Quiz -->
-        <div id="endQuiz" class="box content">
+        <div id="endContainer" class="box content">
             <h2 class="subtitle is-4" id="question">End Quiz</h2>
-            <p>You Pokemon is: <span id="points"></span></p>
-            <button class="button is-danger m-1" id="submit">End</button>
+            <p>You Pokemon type is: <span id="type"></span></p>
+            <button class="button is-danger m-1" id="end">End</button>
         </div>
     </main>
 
@@ -63,6 +63,7 @@
         </audio>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 
