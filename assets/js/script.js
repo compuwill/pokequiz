@@ -11,9 +11,12 @@
 var mainWindow = $("main")
 var startContainer = $("#startContainer")
 var questionContainer = $("#questionContainer")
+var processingContainer = $("#processingContainer")
 var endContainer = $("#endContainer")
 
 var pokedexContainer = $("#pokedex-entries")
+var statsContainer = $("#statsContainer")
+
 
 //Music Preload
 var myAudio = document.getElementById("myAudio");
@@ -50,37 +53,45 @@ var playerInfo = {
     questionNum: 1,
     repeats: [],
     typePoints: {
-        water: 0,
+        normal: 0,
         fire: 0,
-        fighting: 0,
+        water: 0,
         grass: 0,
+        electric: 0,
+        ice: 0,
+        fighting: 0,
+        poison: 0,
+        ground: 0,
         flying: 0,
         psychic: 0,
+        bug: 0,
         rock: 0,
-        ground: 0,
-        normal: 0,
-        electric: 0
+        ghost: 0,
+        dark: 0,
+        dragon: 0,
+        steel: 0,
+        fairy: 0
     }
 }
 
 var questions = [
     {
-        question: "In front of you is a thug threatening to take your money. What do you do?",
+        question: "In front of you is a guy threatening to take your money. What do you do?",
         answers: [{
-            answer: "Splash",
-            points: [{ "water": 1 }]
+            answer: "Throw your drink in his face, and take off",
+            points: [{ "water": 1, "fairy": 1, "flying": 1 }]
         },
         {
-            answer: "Punch",
-            points: [{ "fighting": 1, "rock": 1 }]
+            answer: "Punch him, and hold him down until the cops come",
+            points: [{ "fighting": 2, "rock": 1, "ice": 1, "dark": 1, "dragon": 1 }]
         },
         {
-            answer: "Run Away",
-            points: [{ "fighting": 1, "rock": 1 }]
+            answer: "Sprint away while crying and whimpering",
+            points: [{ "flying": 1, "bug": 1, "fairy": 2, "ghost": 1 }]
         },
         {
-            answer: "Solar Beam",
-            points: [{ "grass": 1 }]
+            answer: "Talk him out of mugging you, and asking him 'deep' questions about his life",
+            points: [{ "grass": 1, "psychic": 2, "fairy": 1, "ground": 1 }]
         }
         ]
     },
@@ -88,35 +99,35 @@ var questions = [
         question: "Which country would you rather travel to?",
         answers: [{
             answer: "The Bahamas",
-            points: [{ "water": 1, "normal": 1, "fire": 1 }]
+            points: [{ "water": 1, "ground": 1, "fire": 1 }]
         },
         {
             answer: "Japan",
-            points: [{ "fighting": 1, "rock": 1, "ground": 1 }]
+            points: [{ "fighting": 1, "rock": 1, "ground": 1, "steel": 1, "dragon": 1 }]
         },
         {
             answer: "New Zealand",
-            points: [{ "grass": 1, "ground": 1 }]
+            points: [{ "grass": 2, "ground": 1, "dragon": 1 }]
         },
         {
             answer: "Mexico",
-            points: [{ "fire": 2 }]
+            points: [{ "fire": 2, "electric": 1, "ghost": 1 }]
         }
         ]
     },
     {
         question: "Which would you rather eat?",
         answers: [{
-            answer: "Ice cream",
-            points: [{ "water": 1, "normal": 1 }]
+            answer: "Ice Cream",
+            points: [{ "water": 1, "normal": 1, "ice": 1 }]
         },
         {
-            answer: "Cheeseburger",
-            points: [{ "fire": 1, "normal": 1, "ground": 1 }]
+            answer: "Cheeseburger and a side of fries",
+            points: [{ "fire": 1, "ground": 1, "steel": 1 }]
         },
         {
-            answer: "French Fries",
-            points: [{ "fire": 1, "ground": 1 }]
+            answer: "Flamin' hot cheetoes",
+            points: [{ "fire": 2, "ground": 1, "poison": 1 }]
         },
         {
             answer: "Spaghetti & Meatballs",
@@ -125,23 +136,203 @@ var questions = [
         ]
     },
     {
+        question: "Who is your favorite marvel superhero?",
+        answers: [{
+            answer: "Iron Man",
+            points: [{ "electric": 2, "steel": 2, "flying": 1, "psychic": 1, "fire": 1 }]
+        },
+        {
+            answer: "Spider-Man",
+            points: [{ "bug": 3, "fighting": 1, "flying": 1, "grass": 1 }]
+        },
+        {
+            answer: "Captain America",
+            points: [{ "normal": 1, "ground": 1, "fighting": 1 }]
+        },
+        {
+            answer: "The Hulk",
+            points: [{ "fighting": 2, "dragon": 1, "grass": 1, "poison": 2 }]
+        }
+        ]
+    },
+    {
+        question: "Who is your favorite marvel supervillain?",
+        answers: [{
+            answer: "Thanos",
+            points: [{ "fighting": 1, "dark": 2, "poison": 1 }]
+        },
+        {
+            answer: "Loki",
+            points: [{ "psychic": 1, "dark": 2, "poison": 3, "grass": 1 }]
+        },
+        {
+            answer: "Ultron",
+            points: [{ "steel": 2, "electric": 2, "psychic": 1 }]
+        },
+        {
+            answer: "Killmonger",
+            points: [{ "fighting": 2, "dragon": 1, "dark": 1, "poison": 1 }]
+        }
+        ]
+    },
+    {
+        question: "What's your biggest goal in life?",
+        answers: [{
+            answer: "Making loads of cash! 🤑",
+            points: [{ "steel": 1, "ice": 1, "poison": 1, "ghost": 1 }]
+        },
+        {
+            answer: "Starting a family 👪",
+            points: [{ "normal": 1, "fairy": 2, "flying": 1, "bug": 1, "grass": 1 }]
+        },
+        {
+            answer: "Finding my true love 💖",
+            points: [{ "fairy": 3, "flying": 1, "bug": 2 }]
+        },
+        {
+            answer: "Leading a fulfilling life 👤",
+            points: [{ "fighting": 1, "dragon": 1, "ground": 1, "psychic": 1 }]
+        }
+        ]
+    },
+    {
+        question: "What's your favorite sleeping position?",
+        answers: [{
+            answer: "I sleep on my back",
+            points: [{ "poison": 1, "ice": 1, "poison": 1, "ghost": 1 }]
+        },
+        {
+            answer: "I sleep on my side",
+            points: [{ "normal": 1, "fighting": 1, "flying": 1, "bug": 1, "grass": 1 }]
+        },
+        {
+            answer: "I sleep on my stomach.",
+            points: [{ "fairy": 1, "bug": 1 }]
+        },
+        {
+            answer: "Sleep? What's sleep?",
+            points: [{ "ghost": 2, "dragon": 1, "poison": 1, "psychic": 1 }]
+        }
+        ]
+    },
+    {
+        question: "What's your favorite taste?",
+        answers: [{
+            answer: "Salty / Savory",
+            points: [{ "fighting": 1, "steel": 1, "rock": 1, "ground": 1 }]
+        },
+        {
+            answer: "Sour",
+            points: [{ "ghost": 1, "grass": 1, "dragon": 1 }]
+        },
+        {
+            answer: "Sweet",
+            points: [{ "fairy": 1, "bug": 1, "grass": 1, "flying": 1 }]
+        },
+        {
+            answer: "Spicy",
+            points: [{ "fire": 1, "dragon": 1, "poison": 1 }]
+        }
+        ]
+    },
+    {
+        question: "What is the best kind of pet?",
+        answers: [{
+            answer: "🐱 Cats, the obvious choice.",
+            points: [{ "psychic": 1, "fairy": 1, "dark": 1, "dragon": 1, "ice": 1 }]
+        },
+        {
+            answer: "🐶 Dogs, they are man's best friend!",
+            points: [{ "grass": 1, "normal": 1, "ground": 1 }]
+        },
+        {
+            answer: "🐦 Birds, they chirp, duh.",
+            points: [{ "flying": 2, "bug": 1, "grass": 1, "ice": 1 }]
+        },
+        {
+            answer: "🚫 Um, I can barely take care of myself!",
+            points: [{ "ghost": 2, "poison": 2, "ice": 1 }]
+        }
+        ]
+    },
+    {
+        question: "How do you get along with people?",
+        answers: [{
+            answer: "Man, most people suck!",
+            points: [{ "dark": 1, "ghost": 1, "dragon": 1, "ice": 1, "rock": 1 }]
+        },
+        {
+            answer: "I love everyone!",
+            points: [{ "grass": 1, "fairy": 2, "ground": 1 }]
+        },
+        {
+            answer: "I get along with most people just fine!",
+            points: [{ "normal": 1 }]
+        },
+        {
+            answer: "I hate everyone and everything.",
+            points: [{ "poison": 2, "ghost": 2, "ice": 1, "rock": 1 }]
+        }
+        ]
+    },
+    {
+        question: "How would you describe your work-ethic?",
+        answers: [{
+            answer: "I do the work that I am given.",
+            points: [{ "ice": 1, "water": 1, "ground": 1 }]
+        },
+        {
+            answer: "I am a workaholic!",
+            points: [{ "steel": 1, "psychic": 1, "rock": 1, "dragon": 1, "fire": 1 }]
+        },
+        {
+            answer: "I procrastinate until I start to panic.",
+            points: [{ "bug": 1, "flying": 1, "normal": 1 }]
+        },
+        {
+            answer: "Gross. I am allergic to work.",
+            points: [{ "poison": 2, "ghost": 2, "ice": 1, "rock": 1 }]
+        }
+        ]
+    },
+    {
+        question: "Which of these emoji best describes you?",
+        answers: [{
+            answer: "😀",
+            points: [{ "normal": 1, "ground": 1, "fairy": 1 }]
+        },
+        {
+            answer: "😭",
+            points: [{ "water": 1, "psychic": 1, "bug": 1 }]
+        },
+        {
+            answer: "😡",
+            points: [{ "fire": 2, "dragon": 1, "poison": 1, "dark": 1 }]
+        },
+        {
+            answer: "🤡",
+            points: [{ "electric": 2, "grass": 2, "ghost": 1 }]
+        }
+        ]
+    },
+    {
         question: "Where would you go on a vacation?",
         answers: [
             {
-                answer: "Mountains",
-                points: [{ "rock": 1 }]
+                answer: "🗻 Mountains",
+                points: [{ "rock": 1, "ground": 1, "ghost": 1 }]
             },
             {
-                answer: "The beach",
-                points: [{ "water": 1 }]
+                answer: "🏐 The Beach",
+                points: [{ "water": 1, "fairy": 1 }]
             },
             {
-                answer: "New York City",
-                points: [{ "electric": 1 }]
+                answer: "🏙 New York City",
+                points: [{ "electric": 1, "steel": 1, "dark": 1 }]
             },
             {
-                answer: "Chicago",
-                points: [{ "Flying": 1 }]
+                answer: "🌆 Chicago",
+                points: [{ "flying": 1, "ice": 1 }]
             }
         ]
     },
@@ -149,20 +340,20 @@ var questions = [
         question: "Where would you choose to live?",
         answers: [
             {
-                answer: "The mountains",
-                points: [{ "rock": 1 }]
+                answer: "In the Mountains",
+                points: [{ "rock": 1, "ground": 1, "ghost": 1, "ice": 1, "dragon": 1 }]
             },
             {
-                answer: "An island",
-                points: [{ "water": 1 }]
+                answer: "On an island",
+                points: [{ "water": 1, "grass": 1, "ground": 1, "bug": 1, "flying": 1, "fire": 1 }]
             },
             {
-                answer: "Big City",
-                points: [{ "electric": 1 }]
+                answer: "In a Big City",
+                points: [{ "electric": 1, "steel": 1, "fairy": 1, "dark": 1, "poison": 1 }]
             },
             {
-                answer: "The country",
-                points: [{ "grass": 1 }]
+                answer: "The countryside",
+                points: [{ "grass": 1, "ground": 1, "fire": 1 }]
             }
         ]
     },
@@ -170,20 +361,104 @@ var questions = [
         question: "What is your preferred choice of travel?",
         answers: [
             {
-                answer: "Train",
-                points: [{ "electric": 1 }]
+                answer: "🚅 By Train, I like the scenery",
+                points: [{ "electric": 1, "fire": 1, "ground": 1 }]
             },
             {
-                answer: "Airplane",
-                points: [{ "flying": 1 }]
+                answer: "🛫 Airplane, its the quickest",
+                points: [{ "flying": 1, "ice": 1, "dragon": 1, "bug": 1 }]
             },
             {
-                answer: "Walking",
-                points: [{ "ground": 1 }]
+                answer: "🚶‍♂️ I kind of just like Walking.",
+                points: [{ "ground": 1, "normal": 1 }]
             },
             {
-                answer: "Boat",
-                points: [{ "water": 1 }]
+                answer: "🚤 By Boat, the smell of the sea calms me.",
+                points: [{ "water": 2, "ice": 1 }]
+            }
+        ]
+    },
+    {
+        question: "You make a mistake that makes someone upset... You _____?",
+        answers: [
+            {
+                answer: "Apologize profusely.",
+                points: [{ "bug": 1, "fairy": 1, "ground": 1 }]
+            },
+            {
+                answer: "Make it up to them by getting them something nice",
+                points: [{ "grass": 1, "water": 1, "dragon": 1, "fairy": 1 }]
+            },
+            {
+                answer: "Don't care. They can just deal with it.",
+                points: [{ "ice": 1, "dark": 1, "poison": 1, "steel": 1 }]
+            },
+            {
+                answer: "Pretend someone else did it.",
+                points: [{ "bug": 1, "dark": 1, "ghost": 1 }]
+            }
+        ]
+    },
+    {
+        question: "The zombie apocalypse becomes reality. You ____?",
+        answers: [
+            {
+                answer: "Die almost immediately.",
+                points: [{ "bug": 1, "fairy": 1, "ghost": 1 }]
+            },
+            {
+                answer: "Find shelter somewhere safe and try to wait it out.",
+                points: [{ "normal": 1, "water": 1, "grass": 1, "ground": 1 }]
+            },
+            {
+                answer: "Lead and start community of zombie fighting civilians",
+                points: [{ "fire": 1, "dragon": 1, "steel": 1, "ice": 1 }]
+            },
+            {
+                answer: "Live in the forest far away from it all.",
+                points: [{ "grass": 2, "bug": 1, "flying": 1 }]
+            }
+        ]
+    },
+    {
+        question: "In a crowd, would you rather ______?",
+        answers: [
+            {
+                answer: "Blend in and not draw any attention to myself.",
+                points: [{ "bug": 1, "ice": 1, "ghost": 1, "dark": 1 }]
+            },
+            {
+                answer: "Make as many friends as possible",
+                points: [{ "fairy": 1, "water": 1, "grass": 1, "psychic": 1 }]
+            },
+            {
+                answer: "Be the center of attention.",
+                points: [{ "fire": 1, "dragon": 1, "poison": 1, "electric": 1, "flying": 1 }]
+            },
+            {
+                answer: "Try to stand out, but not do anything too crazy.",
+                points: [{ "electric": 1, "steel": 1, "flying": 1 }]
+            }
+        ]
+    },
+    {
+        question: "My friends describe me as...",
+        answers: [
+            {
+                answer: "Friendly and outgoing!",
+                points: [{ "fire": 1, "grass": 1, "water": 1, "electric": 1 }]
+            },
+            {
+                answer: "Shy and soft-spoken.",
+                points: [{ "fairy": 1, "bug": 1, "grass": 1, "psychic": 1 }]
+            },
+            {
+                answer: "Funny and entertaining.",
+                points: [{ "grass": 1, "rock": 1, "fairy": 1, "flying": 1, "fire": 1 }]
+            },
+            {
+                answer: "Friends? What's that? 😢",
+                points: [{ "water": 1, "fairy": 1, "bug": 1, "rock": 1, "ground": 1 }]
             }
         ]
     },
@@ -192,19 +467,19 @@ var questions = [
         answers: [
             {
                 answer: "Fight them",
-                points: [{ "fighting": 1 }]
+                points: [{ "fighting": 1, "dark": 1, "ghost": 1 }]
             },
             {
                 answer: "Try to set them on Fire",
-                points: [{ "fire": 1 }]
+                points: [{ "fire": 2, "dark": 2 }]
             },
             {
                 answer: "Run away",
-                points: [{ "normal": 1 }]
+                points: [{ "normal": 1, "flying": 1, "bug": 2, "fairy": 1 }]
             },
             {
                 answer: "Throw sand in their eyes and hit them",
-                points: [{ "ground": 1, "fighting": 1 }]
+                points: [{ "ground": 2, "fighting": 1, "poison": 1 }]
             }
         ]
     },
@@ -213,19 +488,19 @@ var questions = [
         answers: [
             {
                 answer: "Breakfast",
-                points: [{ "rock": 1 }]
+                points: [{ "rock": 1, "dragon": 1, "psychic": 1 }]
             },
             {
                 answer: "Brunch",
-                points: [{ "normal": 1 }]
+                points: [{ "normal": 1, "fairy": 1, "bug": 1 }]
             },
             {
                 answer: "Lunch",
-                points: [{ "water": 1 }]
+                points: [{ "water": 1, "ice": 1 }]
             },
             {
                 answer: "Dinner",
-                points: [{ "fire": 1 }]
+                points: [{ "fire": 1, "dragon": 1, "dark": 1 }]
             }
         ]
     },
@@ -234,19 +509,19 @@ var questions = [
         answers: [
             {
                 answer: "Eh, I just brush stupid people off",
-                points: [{ "Water": 1 }]
+                points: [{ "water": 1, "normal": 1, "ice": 1, "bug": 1, "fairy": 1 }]
             },
             {
                 answer: "Don't start with ME",
-                points: [{ "normal": 1 }]
+                points: [{ "fire": 1, "poison": 1, "ice": 2 }]
             },
             {
                 answer: "You look at me wrong, I'm swinging on YOU",
-                points: [{ "fighting": 1 }]
+                points: [{ "fighting": 2, "fire": 2, "dark": 2 }]
             },
             {
                 answer: "In order to get angry I'd have to care",
-                points: [{ "psychic": 1 }]
+                points: [{ "psychic": 1, "normal": 1, "water": 1, "grass": 2 }]
             }
         ]
     },
@@ -254,20 +529,20 @@ var questions = [
         question: "What is your dream job?",
         answers: [
             {
-                answer: "Construction",
-                points: [{ "rock": 1 }]
+                answer: "👷‍♂️ Construction",
+                points: [{ "rock": 1, "steel": 1 }]
             },
             {
-                answer: "Business owner",
-                points: [{ "fire": 1 }]
+                answer: "👨‍💼 Business owner",
+                points: [{ "fire": 1, "dragon": 2 }]
             },
             {
-                answer: "Doctor",
-                points: [{ "psychic": 1 }]
+                answer: "👩‍⚕️ Doctor",
+                points: [{ "psychic": 1, "fairy": 1 }]
             },
             {
-                answer: "Pilot",
-                points: [{ "Flying": 1 }]
+                answer: "👨‍✈️ Pilot",
+                points: [{ "flying": 2, "bug": 1 }]
             }
         ]
     },
@@ -275,20 +550,20 @@ var questions = [
         question: "What do you look forward to most on a normal day?",
         answers: [
             {
-                answer: "Going to sleep",
-                points: [{ "normal": 1 }]
+                answer: "💤 Going to sleep",
+                points: [{ "normal": 1, "ghost": 2, "psychic": 1 }]
             },
             {
-                answer: "Watching TV",
-                points: [{ "water": 1 }]
+                answer: "📺 Watching TV",
+                points: [{ "water": 1, "electric": 1, "ghost": 1 }]
             },
             {
-                answer: "Playing video games",
-                points: [{ "electric": 1 }]
+                answer: "🎮 Playing video games",
+                points: [{ "electric": 1, "steel": 1 }]
             },
             {
-                answer: "Hanging out with friends",
-                points: [{ "grass": 1 }]
+                answer: "👥 Hanging out with friends",
+                points: [{ "grass": 1, "fairy": 1, "water": 1 }]
             }
         ]
     },
@@ -297,19 +572,19 @@ var questions = [
         answers: [
             {
                 answer: "Football",
-                points: [{ "fighting": 1 }]
+                points: [{ "fighting": 1, "steel": 1 }]
             },
             {
                 answer: "Swimming",
-                points: [{ "water": 1 }]
+                points: [{ "water": 2, "ice": 1 }]
             },
             {
                 answer: "Basketball",
-                points: [{ "normal": 1 }]
+                points: [{ "normal": 1, "flying": 1 }]
             },
             {
                 answer: "Soccer",
-                points: [{ "grass": 1 }]
+                points: [{ "grass": 2 }]
             }
         ]
     },
@@ -318,19 +593,19 @@ var questions = [
         answers: [
             {
                 answer: "Hike up then back down",
-                points: [{ "rock": 1 }]
+                points: [{ "rock": 2, "fighting": 1 }]
             },
             {
                 answer: "Use the lift up then down the other side",
-                points: [{ "electric": 1 }]
+                points: [{ "electric": 1, "ice": 1, "electric": 1 }]
             },
             {
                 answer: "Walk around it following the river",
-                points: [{ "water": 1 }]
+                points: [{ "water": 2, "grass": 1, "bug": 1 }]
             },
             {
                 answer: "Sprout wings and soar to your destination",
-                points: [{ "Flying": 1 }]
+                points: [{ "flying": 2, "dragon": 2, "bug": 2 }]
             }
         ]
     },
@@ -339,19 +614,19 @@ var questions = [
         answers: [
             {
                 answer: "Soda",
-                points: [{ "normal": 1 }]
+                points: [{ "normal": 1, "ice": 1 }]
             },
             {
                 answer: "Water",
-                points: [{ "water": 1 }]
+                points: [{ "water": 2, "ice": 1, "ghost": 1 }]
             },
             {
                 answer: "Coffee",
-                points: [{ "electric": 1 }]
+                points: [{ "electric": 2, "fire": 1, "grass": 2 }]
             },
             {
                 answer: "Energy drinks",
-                points: [{ "rock": 1 }]
+                points: [{ "rock": 1, "electric": 2 }]
             }
         ]
     },
@@ -360,7 +635,7 @@ var questions = [
         answers: [
             {
                 answer: "None",
-                points: [{ "psychic": 1 }]
+                points: [{ "psychic": 1, "steel": 1, "fighting": 1 }]
             },
             {
                 answer: "1 hour",
@@ -368,11 +643,11 @@ var questions = [
             },
             {
                 answer: "3 hours",
-                points: [{ "normal": 1 }]
+                points: [{ "normal": 1, "fairy": 1 }]
             },
             {
                 answer: "5 or more hours",
-                points: [{ "electric": 1 }]
+                points: [{ "electric": 1, "ghost": 1, "poison": 1 }]
             }
         ]
     },
@@ -381,19 +656,19 @@ var questions = [
         answers: [
             {
                 answer: "Horror",
-                points: [{ "psychic": 1 }]
+                points: [{ "psychic": 1, "ghost": 4 }]
             },
             {
                 answer: "Drama",
-                points: [{ "normal": 1 }]
+                points: [{ "normal": 1, "water": 1 }]
             },
             {
                 answer: "Anime",
-                points: [{ "fighting": 1 }]
+                points: [{ "fighting": 1, "rock": 1 }]
             },
             {
                 answer: "Comedy",
-                points: [{ "fire": 1 }]
+                points: [{ "fire": 1, "grass": 1, "bug": 1 }]
             }
         ]
     },
@@ -402,19 +677,19 @@ var questions = [
         answers: [
             {
                 answer: "Popcorn",
-                points: [{ "normal": 1 }]
+                points: [{ "normal": 1, "bug": 1 }]
             },
             {
                 answer: "Chocolate",
-                points: [{ "psychic": 1 }]
+                points: [{ "psychic": 1, "fairy": 1 }]
             },
             {
                 answer: "Soda",
-                points: [{ "electric": 1 }]
+                points: [{ "electric": 1, "ice": 1 }]
             },
             {
                 answer: "Nachos",
-                points: [{ "fire": 1 }]
+                points: [{ "fire": 1, "rock": 1 }]
             }
         ]
     },
@@ -423,7 +698,7 @@ var questions = [
         answers: [
             {
                 answer: "Dinner and a movie",
-                points: [{ "normal": 1 }]
+                points: [{ "normal": 1, "water": 1 }]
             },
             {
                 answer: "Picnic",
@@ -431,11 +706,11 @@ var questions = [
             },
             {
                 answer: "Flying to another country",
-                points: [{ "flying": 1 }]
+                points: [{ "flying": 1, "bug": 1 }]
             },
             {
                 answer: "Go cruising",
-                points: [{ "electric": 1 }]
+                points: [{ "electric": 1, "dragon": 1, "fairy": 1 }]
             }
         ]
     },
@@ -444,19 +719,19 @@ var questions = [
         answers: [
             {
                 answer: "Blue",
-                points: [{ "normal": 1 }]
+                points: [{ "water": 1, "ice": 1 }]
             },
             {
                 answer: "Red",
-                points: [{ "psychic": 1 }]
+                points: [{ "fire": 1, "fighting": 1, "dragon": 1 }]
             },
             {
                 answer: "Green",
-                points: [{ "electric": 1 }]
+                points: [{ "electric": 1, "grass": 2, "poison": 1 }]
             },
             {
                 answer: "Purple",
-                points: [{ "fire": 1 }]
+                points: [{ "fire": 1, "dragon": 1, "ghost": 1, "flying": 1 }]
             }
         ]
     },
@@ -465,19 +740,19 @@ var questions = [
         answers: [
             {
                 answer: "Psychologist",
-                points: [{ "normal": 1 }]
+                points: [{ "psychic": 2, "rock": 1, "ghost": 1 }]
             },
             {
                 answer: "Developer",
-                points: [{ "psychic": 1 }]
+                points: [{ "steel": 1, "ghost": 1, "electric": 1 }]
             },
             {
                 answer: "Lawyer",
-                points: [{ "electric": 1 }]
+                points: [{ "dark": 1, "ghost": 1, "steel": 1 }]
             },
             {
                 answer: "Doctor",
-                points: [{ "fire": 1 }]
+                points: [{ "fire": 1, "fairy": 1, "psychic": 1 }]
             }
         ]
     },
@@ -486,19 +761,19 @@ var questions = [
         answers: [
             {
                 answer: "Calm and Collected",
-                points: [{ "normal": 1 }]
+                points: [{ "normal": 1, "ice": 1, "steel": 1, "dragon": 1 }]
             },
             {
                 answer: "Anxious",
-                points: [{ "psychic": 1 }]
+                points: [{ "psychic": 1, "fairy": 1, "bug": 1 }]
             },
             {
                 answer: "Outgoing",
-                points: [{ "electric": 1 }]
+                points: [{ "electric": 1, "fire": 1, "fairy": 1 }]
             },
             {
                 answer: "Aloft",
-                points: [{ "fire": 1 }]
+                points: [{ "flying": 1, "dragon": 1, "grass": 1, "water": 1 }]
             }
         ]
     },
@@ -507,19 +782,19 @@ var questions = [
         answers: [
             {
                 answer: "Mother",
-                points: [{ "normal": 1 }]
+                points: [{ "normal": 1, "fairy": 1, "water": 1, "ice": 1 }]
             },
             {
                 answer: "Father",
-                points: [{ "psychic": 1 }]
+                points: [{ "psychic": 1, "fighting": 1, "dark": 1 }]
             },
             {
                 answer: "Brother/Sister",
-                points: [{ "electric": 1 }]
+                points: [{ "electric": 1, "water": 1, "grass": 1 }]
             },
             {
                 answer: "Grandma/Grandpa",
-                points: [{ "fire": 1 }]
+                points: [{ "fairy": 1, "ghost": 1 }]
             }
         ]
     },
@@ -527,20 +802,20 @@ var questions = [
         question: "Favorite kind of pizza?",
         answers: [
             {
-                answer: "Cheese",
-                points: [{ "normal": 1 }]
+                answer: "🧀 Cheese",
+                points: [{ "normal": 1, "water": 1 }]
             },
             {
-                answer: "Pepperoni",
-                points: [{ "psychic": 1 }]
+                answer: "🍕 Pepperoni",
+                points: [{ "psychic": 1, "electric": 1 }]
             },
             {
-                answer: "Veggie",
-                points: [{ "electric": 1 }]
+                answer: "🥦 Veggie",
+                points: [{ "fairy": 1, "grass": 2 }]
             },
             {
-                answer: "Meat-lover",
-                points: [{ "fire": 1 }]
+                answer: "🍖 Meat-lover",
+                points: [{ "fire": 1, "fighting": 1 }]
             }
         ]
     },
@@ -549,19 +824,19 @@ var questions = [
         answers: [
             {
                 answer: "Coupe",
-                points: [{ "normal": 1 }]
+                points: [{ "electric": 1, "flying": 1 }]
             },
             {
                 answer: "SUV",
-                points: [{ "psychic": 1 }]
+                points: [{ "psychic": 1, "fairy": 1, "rock": 1 }]
             },
             {
                 answer: "Sedan",
-                points: [{ "electric": 1 }]
+                points: [{ "normal": 1 }]
             },
             {
                 answer: "Soccer mom",
-                points: [{ "fire": 1 }]
+                points: [{ "fire": 1, "fairy": 1, "grass": 1 }]
             }
         ]
     },
@@ -570,19 +845,19 @@ var questions = [
         answers: [
             {
                 answer: "Basketball",
-                points: [{ "normal": 1 }]
+                points: [{ "normal": 1, "flying": 1, "bug": 1 }]
             },
             {
                 answer: "Football",
-                points: [{ "psychic": 1 }]
+                points: [{ "steel": 1, "ice": 1 }]
             },
             {
                 answer: "Boxing",
-                points: [{ "electric": 1 }]
+                points: [{ "fighting": 1, "dragon": 1, "rock": 1 }]
             },
             {
                 answer: "Soccer",
-                points: [{ "fire": 1 }]
+                points: [{ "grass": 1, "poison": 1 }]
             }
         ]
     },
@@ -591,19 +866,19 @@ var questions = [
         answers: [
             {
                 answer: "Standing in a parking lot talking and looking bored and complicated.",
-                points: [{ "normal": 1 }]
+                points: [{ "steel": 1, "ice": 2, "ghost": 2 }]
             },
             {
                 answer: "A movie and ice cream. Classic.",
-                points: [{ "psychic": 1 }]
+                points: [{ "ice": 1, "electric": 1, "psychic": 1 }]
             },
             {
                 answer: "Going out on a hike.",
-                points: [{ "electric": 1 }]
+                points: [{ "grass": 2, "bug": 2, "flying": 1, "rock": 1 }]
             },
             {
                 answer: "Go out to dinner.",
-                points: [{ "fire": 1 }]
+                points: [{ "fire": 1, "normal": 2, "water": 1 }]
             }
         ]
     },
@@ -612,19 +887,19 @@ var questions = [
         answers: [
             {
                 answer: "Math",
-                points: [{ "normal": 1 }]
+                points: [{ "normal": 1, "psychic": 1, "ice": 1 }]
             },
             {
                 answer: "Social studies",
-                points: [{ "psychic": 1 }]
+                points: [{ "psychic": 1, "steel": 1, "grass": 1, "fairy": 1 }]
             },
             {
                 answer: "Science",
-                points: [{ "electric": 1 }]
+                points: [{ "electric": 1, "steel": 1, "bug": 1 }]
             },
             {
                 answer: "P.E.",
-                points: [{ "fire": 1 }]
+                points: [{ "fire": 1, "fighting": 1, "rock": 1 }]
             }
         ]
     },
@@ -633,19 +908,19 @@ var questions = [
         answers: [
             {
                 answer: "Adventure",
-                points: [{ "normal": 1 }]
+                points: [{ "normal": 1, "flying": 1 }]
             },
             {
                 answer: "Relaxation",
-                points: [{ "psychic": 1 }]
+                points: [{ "psychic": 1, "ice": 1, "normal": 1 }]
             },
             {
                 answer: "Knowledge",
-                points: [{ "electric": 1 }]
+                points: [{ "electric": 1, "psychic": 2 }]
             },
             {
                 answer: "Power",
-                points: [{ "fire": 1 }]
+                points: [{ "fire": 1, "fighting": 1, "dragon": 2, "dark": 2, "poison": 2 }]
             }
         ]
     },
@@ -654,19 +929,19 @@ var questions = [
         answers: [
             {
                 answer: "Phone",
-                points: [{ "normal": 1 }]
+                points: [{ "electric": 1, "rock": 1, "fairy": 1, "normal": 1 }]
             },
             {
-                answer: "Wallet/purse",
-                points: [{ "psychic": 1 }]
+                answer: "Wallet / purse",
+                points: [{ "psychic": 1, "poison": 1 }]
             },
             {
                 answer: "Glasses",
-                points: [{ "electric": 1 }]
+                points: [{ "electric": 1, "bug": 1, "psychic": 1 }]
             },
             {
                 answer: "Headphones",
-                points: [{ "fire": 1 }]
+                points: [{ "electric": 1, "ground": 1, "rock": 1 }]
             }
         ]
     },
@@ -675,19 +950,19 @@ var questions = [
         answers: [
             {
                 answer: "Spring",
-                points: [{ "normal": 1 }]
+                points: [{ "normal": 1, "grass": 2, "bug": 1, "ground": 1 }]
             },
             {
                 answer: "Winter",
-                points: [{ "psychic": 1 }]
+                points: [{ "ice": 2, "water": 1, "dark": 1, "ghost": 1, "steel": 1 }]
             },
             {
                 answer: "Summer",
-                points: [{ "electric": 1 }]
+                points: [{ "fire": 1, "grass": 1, "dragon": 1 }]
             },
             {
                 answer: "Fall",
-                points: [{ "fire": 1 }]
+                points: [{ "flying": 1, "ice": 1, "ground": 1, "ghost": 1 }]
             }
         ]
     },
@@ -696,19 +971,19 @@ var questions = [
         answers: [
             {
                 answer: "Hip hop",
-                points: [{ "normal": 1 }]
+                points: [{ "fighting": 1, "dark": 1 }]
             },
             {
                 answer: "Rock",
-                points: [{ "psychic": 1 }]
+                points: [{ "rock": 2, "ground": 1, "fighting": 1 }]
             },
             {
                 answer: "Country",
-                points: [{ "electric": 1 }]
+                points: [{ "grass": 1, "ice": 1, "ice": 1 }]
             },
             {
                 answer: "Pop",
-                points: [{ "fire": 1 }]
+                points: [{ "normal": 1, "fairy": 1 }]
             }
         ]
     },
@@ -753,16 +1028,24 @@ $("#start").on("click", function (e) {
         questionNum: 1,
         repeats: [],
         typePoints: {
-            water: 0,
+            normal: 0,
             fire: 0,
-            fighting: 0,
+            water: 0,
             grass: 0,
+            electric: 0,
+            ice: 0,
+            fighting: 0,
+            poison: 0,
+            ground: 0,
             flying: 0,
             psychic: 0,
+            bug: 0,
             rock: 0,
-            ground: 0,
-            normal: 0,
-            electric: 0
+            ghost: 0,
+            dark: 0,
+            dragon: 0,
+            steel: 0,
+            fairy: 0
         }
     }
 
@@ -823,10 +1106,18 @@ questionContainer.on("click", "button", function (e) {
         myAudio.pause();
         //remove the question container
         questionContainer.detach();
-        //add the end container
-        mainWindow.append(endContainer);
+
         //run the checkType function (see below)
         checkType();
+
+        //add the processing container
+        mainWindow.append(processingContainer);
+
+        //add the end container after 2.5 seconds
+        setTimeout(function(){
+            processingContainer.detach();
+            endContainer.show();
+        }, 2500); 
     }
 });
 
@@ -868,8 +1159,9 @@ var checkType = function () {
 
                     $("#randompokemonimage").attr("src", pokeImage);
 
-                    console.log(pokemonData);
+                    //empty the pokedex entries
                     pokedexContainer.empty();
+
                     //FETCH the species pokedex entries
                     fetch(speciesURL)
                         .then(response => response.json())
@@ -880,14 +1172,11 @@ var checkType = function () {
 
                             //for each pokedex entry add it to the pokdex
                             speciesData.flavor_text_entries.forEach(entry => {
-                                var entryText = entry.flavor_text.replace("\n"," ").replace("\f"," ").trim();
+                                var entryText = entry.flavor_text.replace("\n", " ").replace("\f", " ").trim();
                                 //only create a p element if its in english
                                 if (entry.language.name == "en" && !pokeDexEntries.includes(entryText) && pokeDexEntries.length < 6) {
 
                                     //create a new p element
-                                    console.log(entry.version.name);
-                                    console.log(entryText);
-
                                     var text = $("<p>").text(entryText)
                                     pokedexContainer.append(text);
 
@@ -906,16 +1195,66 @@ var checkType = function () {
 
     //set the type.text on the page
     $("#type").text(type.toUpperCase());
+
+    //add one point to the final type to prevent draws
+    playerInfo.typePoints[type] += 1;
+    maxPoints += 1;
+
+    //empty the stats container to start fresh
+    statsContainer.empty();
+
+    //create the progress bars per type
+    Object.keys(playerInfo.typePoints).sort(comparePoints).forEach(key => {
+        //create the progress bar
+        var progressText = $("<p>").text(key.toUpperCase()).addClass("has-text-weight-bold");
+        var progressBar = $("<progress>").addClass("progress").addClass(key).attr("value", playerInfo.typePoints[key]).attr("max", maxPoints);
+        statsContainer.append(progressText);
+        statsContainer.append(progressBar);
+    })
+
+}
+
+//helper function that compares
+var comparePoints = function (a, b) {
+    if (playerInfo.typePoints[a] < playerInfo.typePoints[b]) {
+        return 1;
+    }
+    if (playerInfo.typePoints[a] > playerInfo.typePoints[b]) {
+        return -1;
+    }
+    // a must be equal to b
+    return 0;
 }
 
 //set up what happens when the end button is clicked
 $("#end").on("click", function (e) {
     //remove the end quiz container
-    endContainer.detach();
+    endContainer.hide();
     //add back in the start container
     mainWindow.append(startContainer);
 })
 
 //Remove all other containers in the beginning (detach() does not remove assignments whereas remove() does )
 questionContainer.detach();
-endContainer.detach();
+processingContainer.detach();
+endContainer.hide();
+
+
+
+//AUDIT the pokemon questions
+// this checks how many points total are possible amongst all the questions
+
+questions.forEach(question => {
+    question.answers.forEach(answer => {
+
+        answer.points.forEach(element => {
+            Object.keys(element).forEach(key => {
+                playerInfo.typePoints[key] += element[key];
+            })
+        });
+
+    })
+
+})
+
+console.log(playerInfo.typePoints);

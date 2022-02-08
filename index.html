@@ -5,33 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poke Quiz</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 
 <body>
     <!-- navigation -->
-    <header class="navbar container mb-3 has-text-centered is-flex is-justify-content-space-between	">
-            <h1 class="">
-                <a href="/" class="title is-1">
-                    Poke Quiz
-                </a>
-            </h1>
-
-            <audio id="myAudio" src="./assets/audio/Pokemon Red, Yellow, Blue Battle Music- Trainer_360P - Copy.mp4"
-                preload="auto">
-            </audio>
-            <a onClick="togglePlay()" class="">
-                <img src="https://img.icons8.com/audio" id="iconapi">
+    <header class="navbar container mb-3 has-text-centered is-flex is-justify-content-space-between	p-3">
+        <h1 class="">
+            <a href="#" class="title is-1">
+                Poke Quiz
             </a>
+        </h1>
+
+        <audio id="myAudio" src="./assets/audio/Pokemon Red, Yellow, Blue Battle Music- Trainer_360P - Copy.mp4"
+            preload="auto">
+        </audio>
+        <a onClick="togglePlay()" class="">
+            <img src="https://img.icons8.com/audio" id="iconapi">
+        </a>
     </header>
 
     <!-- Main Container -->
-    <main class="container" id="#mainWindow">
+    <main class="container" id="mainWindow">
 
         <!-- Start Box -->
-        <div id="startContainer" class="box content ">
+        <div id="startContainer" class="box content m-3">
             <h2 class="subtitle is-4">Poke Quiz</h2>
             <p class="m-2">Have you ever wondered what kind of pokemon you would be? Well you are in luck. Enter your
                 name and press start!</p>
@@ -39,16 +39,16 @@
                 <div class="form-group">
                     <input class="input" type="text" name="player-name" placeholder="Enter Player Name" id="userName" />
                 </div>
-                <div class="form-group">
-                    <button class="button is-danger" id="start" type="submit">Start</button>
+                <div class="form-group is-flex mt-3 is-flex-direction-column is-align-items-stretch	">
+                    <button class="button is-primary is-large" id="start" type="submit">Start</button>
                 </div>
             </form>
         </div>
 
         <!-- Question Box -->
-        <div id="questionContainer" class="box content">
+        <div id="questionContainer" class="box content m-3">
             <h2 class="subtitle is-4" id="question">Question [X]</h2>
-            <div id="answers" class="is-flex is-flex-direction-column">
+            <div id="answers" class="is-flex is-flex-direction-column ">
                 <button class="button is-light m-1" data-answer="1" id="btn-1">Answer 1</button>
                 <button class="button is-light m-1" data-answer="2" id="btn-2">Answer 2</button>
                 <button class="button is-light m-1" data-answer="3" id="btn-3">Answer 3</button>
@@ -56,29 +56,65 @@
             </div>
         </div>
 
+        <!-- Processing Box -->
+        <div id="processingContainer" class="box content m-3">
+            <h2 class="subtitle is-4" id="question">Processing your results...</h2>
+            <progress class="progress is-large is-primary" max="100">15%</progress>
+        </div>
+
         <!-- End Quiz -->
-        <div id="endContainer" class="box content">
-            <h2 class="subtitle is-4" id="question">End Quiz</h2>
-            <p>Your Pokemon type is: </p>
-            <span class="has-text-weight-bold" id="type"></span>
-            <h3>The results are in, you are this pokemon: </h3>
-            <div class="box is-flex is-flex-direction-column is-align-items-center	" id="pokemon-info">
-                <h2 id="pokemon"></h2>
-                <img src="" id="randompokemonimage"><br>
-                <!-- Pokedex entries go inside here -->
-                <div id="pokedex-entries">
+        <div id="endContainer" class="box content m-3">
+            <h2 class="subtitle is-4">The results are in...</h2>
 
-                </div>  
+            <!-- Type -->
+            <article class="message">
+                <div class="message-header">
+                    <p>Your Pokemon type is: </p>
+                </div>
+                <div class="message-body">
+                    <h3 class="has-text-weight-bold has-text-centered" id="type"></h3>
+                </div>
+            </article>
+
+            <!-- Specific Pokemon -->
+            <article class="message">
+                <div class="message-header">
+                    <p>We have determined that you are: </p>
+                </div>
+                <div class="message-body">
+
+                    <div class="box is-flex is-flex-direction-column m-3 columns" id="pokemon-info">
+                        <h2 class="has-text-centered" id="pokemon"></h2>
+                        <img class="column is-half is-offset-one-quarter" src="" id="randompokemonimage"><br>
+                        <!-- Pokedex entries go inside here -->
+                        <div id="pokedex-entries">
+
+                        </div>
+                    </div>
+
+                </div>
+            </article>
+
+            <!-- Detailed Results -->
+            <article class="message">
+                <div class="message-header">
+                    <p>Your Pokemon type points summary: </p>
+                </div>
+                <div class="message-body" id="statsContainer">
+                    <!-- stats will go here -->
+                </div>
+            </article>
+
+            <div class="form-group is-flex mt-3 is-flex-direction-column is-align-items-stretch	">
+                <button class="button is-danger m-1" id="end">Start over</button>
             </div>
-
-            <button class="button is-danger m-1" id="end">End</button>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="footer container mt-3">
+    <!-- <footer class="footer container mt-3">
 
-    </footer>
+    </footer> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="./assets/js/script.js"></script>

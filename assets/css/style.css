@@ -1,0 +1,96 @@
+html,
+body {
+	height: 100%;
+}
+
+#mainWindow {
+    min-height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: stretch;
+}
+
+/* Makes it so the image is not blurry */
+#randompokemonimage {
+    image-rendering: pixelated;
+}
+
+.button {
+    white-space: unset;
+    height: auto;
+}
+
+
+progress.normal::-moz-progress-bar { background: #A8A878; }
+progress.normal::-webkit-progress-value { background: #A8A878; }
+progress.normal { color: #A8A878; }
+
+progress.fire::-moz-progress-bar { background: #F08030; }
+progress.fire::-webkit-progress-value { background: #F08030; }
+progress.fire { color: #F08030; }
+
+progress.water::-moz-progress-bar { background: #6890F0; }
+progress.water::-webkit-progress-value { background: #6890F0; }
+progress.water { color: #6890F0; }
+
+progress.grass::-moz-progress-bar { background: #78C850; }
+progress.grass::-webkit-progress-value { background: #78C850; }
+progress.grass { color: #78C850; }
+
+progress.electric::-moz-progress-bar { background: #F8D030; }
+progress.electric::-webkit-progress-value { background: #F8D030; }
+progress.electric { color: #F8D030; }
+
+progress.ice::-moz-progress-bar { background: #98D8D8; }
+progress.ice::-webkit-progress-value { background: #98D8D8; }
+progress.ice { color: #98D8D8; }
+
+progress.fighting::-moz-progress-bar { background: #C03028; }
+progress.fighting::-webkit-progress-value { background: #C03028; }
+progress.fighting { color: #C03028; }
+
+progress.poison::-moz-progress-bar { background: #A040A0; }
+progress.poison::-webkit-progress-value { background: #A040A0; }
+progress.poison { color: #A040A0; }
+
+progress.ground::-moz-progress-bar { background: #E0C068; }
+progress.ground::-webkit-progress-value { background: #E0C068; }
+progress.ground { color: #E0C068; }
+
+progress.flying::-moz-progress-bar { background: #A890F0; }
+progress.flying::-webkit-progress-value { background: #A890F0; }
+progress.flying { color: #A890F0; }
+
+progress.psychic::-moz-progress-bar { background: #F85888; }
+progress.psychic::-webkit-progress-value { background: #F85888; }
+progress.psychic { color: #F85888; }
+
+progress.bug::-moz-progress-bar { background: #A8B820; }
+progress.bug::-webkit-progress-value { background: #A8B820; }
+progress.bug { color: #A8B820; }
+
+progress.rock::-moz-progress-bar { background: #B8A038; }
+progress.rock::-webkit-progress-value { background: #B8A038; }
+progress.rock { color: #B8A038; }
+
+progress.ghost::-moz-progress-bar { background: #705898; }
+progress.ghost::-webkit-progress-value { background: #705898; }
+progress.ghost { color: #705898; }
+
+progress.dark::-moz-progress-bar { background: #705848; }
+progress.dark::-webkit-progress-value { background: #705848; }
+progress.dark { color: #705848; }
+
+progress.dragon::-moz-progress-bar { background: #7038F8; }
+progress.dragon::-webkit-progress-value { background: #7038F8; }
+progress.dragon { color: #7038F8; }
+
+progress.steel::-moz-progress-bar { background: #B8B8D0; }
+progress.steel::-webkit-progress-value { background: #B8B8D0; }
+progress.steel { color: #B8B8D0; }
+
+progress.fairy::-moz-progress-bar { background: #F0B6BC; }
+progress.fairy::-webkit-progress-value { background: #F0B6BC; }
+progress.fairy { color: #F0B6BC; }
