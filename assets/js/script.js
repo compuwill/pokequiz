@@ -466,19 +466,19 @@ var questions = [
         question: "Which fantasy theme most appeals to you?",
         answers: [
             {
-                answer: "Medieval times with wizards, kings, and castles.",
+                answer: "🏰 Medieval times with wizards, kings, and castles.",
                 points: [{ "dragon": 2, "grass": 1, "rock": 1, "fairy": 1 , "flying": 1 }]
             },
             {
-                answer: "Steampunk with retrofuturistic steam powered machinery.",
+                answer: "🚂 Steampunk with retrofuturistic steam powered machinery.",
                 points: [{ "fire": 1, "steel": 1, "ground": 1, "fighting": 1 }]
             },
             {
-                answer: "Futuristic with flying cars, robots, and lasers.",
+                answer: "🤖 Futuristic with flying cars, robots, and lasers.",
                 points: [{ "electric": 2, "psychic": 1, "steel": 1}]
             },
             {
-                answer: "I don't want to live in a fantasy world.",
+                answer: "❌ I don't want to live in a fantasy world.",
                 points: [{ "normal": 2, "fairy": 1, "dark": 1 }]
             }
         ]
@@ -488,7 +488,7 @@ var questions = [
         answers: [
             {
                 answer: "🧙‍♂️ Mage / Witch / Warlock / Wizard",
-                points: [{ "dragon": 1, "water": 1, "dark": 1, "fairy": 1 }]
+                points: [{ "dragon": 1, "water": 1, "dark": 1, "fairy": 1 , "ghost": 1 }]
             },
             {
                 answer: "🤺 Knight / Fighter / Barbarian / Tank",
@@ -496,7 +496,7 @@ var questions = [
             },
             {
                 answer: "🏹 Rogue / Ranger / Thief / Druid",
-                points: [{ "dark": 2, "grass": 1, "flying": 1, "poison": 1}]
+                points: [{ "dark": 2, "grass": 1, "flying": 1, "poison": 1, "ghost": 1 }]
             },
             {
                 answer: "🪕 Bard / Cleric / Paladin / Healer",
@@ -613,19 +613,19 @@ var questions = [
         question: "What is your favorite sport to watch?",
         answers: [
             {
-                answer: "Football",
+                answer: "🏈 Football",
                 points: [{ "fighting": 1, "steel": 1 }]
             },
             {
-                answer: "Swimming",
+                answer: "🏊‍♀️ Swimming",
                 points: [{ "water": 2, "ice": 1 }]
             },
             {
-                answer: "Basketball",
+                answer: "🏀 Basketball",
                 points: [{ "normal": 1, "flying": 1 }]
             },
             {
-                answer: "Soccer",
+                answer: "⚽ Soccer",
                 points: [{ "grass": 2 }]
             }
         ]
@@ -706,11 +706,11 @@ var questions = [
             },
             {
                 answer: "Anime",
-                points: [{ "fighting": 1, "rock": 1 }]
+                points: [{ "fighting": 1, "rock": 1, "bug": 1  }]
             },
             {
                 answer: "Comedy",
-                points: [{ "fire": 1, "grass": 1, "bug": 1 }]
+                points: [{ "fire": 1, "grass": 1}]
             }
         ]
     },
@@ -718,19 +718,19 @@ var questions = [
         question: "Favorite snack for a movie?",
         answers: [
             {
-                answer: "Popcorn",
+                answer: "🍿 Popcorn",
                 points: [{ "normal": 1, "bug": 1 }]
             },
             {
-                answer: "Chocolate",
+                answer: "🍫 Chocolate",
                 points: [{ "psychic": 1, "fairy": 1 }]
             },
             {
-                answer: "Soda",
+                answer: "🥤 Soda",
                 points: [{ "electric": 1, "ice": 1 }]
             },
             {
-                answer: "Nachos",
+                answer: "🌮 Nachos",
                 points: [{ "fire": 1, "rock": 1 }]
             }
         ]
@@ -886,19 +886,19 @@ var questions = [
         question: "Favorite sport?",
         answers: [
             {
-                answer: "Basketball",
+                answer: "🏀 Basketball",
                 points: [{ "normal": 1, "flying": 1, "bug": 1 }]
             },
             {
-                answer: "Football",
+                answer: "🏈 Football",
                 points: [{ "steel": 1, "ice": 1 }]
             },
             {
-                answer: "Boxing",
+                answer: "🥊 Boxing",
                 points: [{ "fighting": 1, "dragon": 1, "rock": 1 }]
             },
             {
-                answer: "Soccer",
+                answer: "⚽ Soccer",
                 points: [{ "grass": 1, "poison": 1 }]
             }
         ]
