@@ -756,6 +756,7 @@ $("#start").on("click", function (e) {
 
     //set the playerInfo name to what they typed
     playerInfo.name = $("#userName").val();
+    localStorage.setItem("Player Name", playerInfo.name);
 
     //remove the start container
     startContainer.detach();
@@ -771,6 +772,9 @@ $("#start").on("click", function (e) {
     //run the loadRandomQuestion function
     loadRandomQuestion();
 })
+
+    var loadedName = localStorage.getItem("Player Name");
+    $("#userName").val(loadedName);
 
 //When an answer is clicked
 questionContainer.on("click", "button", function (e) {
@@ -844,17 +848,14 @@ var checkType = function () {
          $("#pokemon").text(pokemonName);
 
          //get the image by making another API call
-         fetch('https://pokeapi.co/api/v2/type/'+type)
+         fetch(pokemonURL)
          .then(response => response.json())
-         .then(data => {
-
+         .then(pokemonData => {
+             var pokeImage = pokemonData.sprites.front_default
+        $("#randompokemonimage").attr("src", pokeImage);
+        console.log(pokemonData);   
          });
-
-
-         console.log(data);    
-     });
-
-     
+     });    
 
     //set the type.text on the page
     $("#type").text(type);
