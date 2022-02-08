@@ -1196,6 +1196,9 @@ var checkType = function () {
     //set the type.text on the page
     $("#type").text(type.toUpperCase());
 
+    //set the attn to the player
+    $("#attn").text(playerInfo.name.toUpperCase() + " , the results are in...");
+
     //add one point to the final type to prevent draws
     playerInfo.typePoints[type] += 1;
     maxPoints += 1;
