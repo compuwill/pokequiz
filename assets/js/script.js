@@ -16,28 +16,17 @@ var endContainer = $("#endContainer")
 
 //Music Preload
 var audMusic = new Audio('./assets/audio/Pokemon Red, Yellow, Blue Battle Music- Trainer_360P - Copy.mp4')
-audMusic.volume = 0.5
+audMusic.volume = 0.2
 
 //Sound Effects preload
 var audDamage = new Audio('./assets/sounds/damage.wav')
-audDamage.volume = 0.5
-
-//global point values
-var water = 0;
-var fire = 0;
-var fighting = 0;
-var grass = 0;
-var flying = 0;
-var psychic = 0;
-var rock = 0;
-var ground = 0;
-var normal = 0;
-var electric = 0;
+audDamage.volume = 0.2
 
 //Declare a 'playerInfo' object so that we can track of ALL player information in one place.
 var playerInfo = {
     name: "",
     questionNum: 1,
+    repeats: [],
     typePoints: {
         water: 0,
         fire: 0,
@@ -708,7 +697,9 @@ var questions = [
 var loadRandomQuestion = function () {
     //use the helper function to get a number
     var num = getRandomIntInclusive(0, questions.length - 1)
-
+    while (playerInfo.repeats.includes(num.toString())) {
+    num = getRandomIntInclusive(0, questions.length - 1)
+    }
     //set the question text to the random question
     $("#question").text(questions[num].question)
 
@@ -739,6 +730,7 @@ $("#start").on("click", function (e) {
     playerInfo = {
         name: "",
         questionNum: 1,
+        repeats: [],
         typePoints: {
             water: 0,
             fire: 0,
@@ -785,6 +777,9 @@ questionContainer.on("click", "button", function (e) {
     //play the damage noise
     audDamage.currentTime = 0;
     audDamage.play()
+
+    playerInfo.repeats.push(num);
+    console.log(playerInfo.repeats);
 
     //add the points to playerInfo by looping through the answer's points types
     questions[num].answers[ans - 1].points.forEach(element => {
