@@ -21,19 +21,29 @@ myAudio.onplaying = function() {
 myAudio.onpause = function() {
   isPlaying = false;
 };
-//global point values
-var water = 0;
-var fire = 0;
-var fighting = 0;
-var grass = 0;
-var flying = 0;
-var psychic = 0;
-var rock = 0;
-var ground = 0;
-var normal = 0;
-var electric = 0;
 
+//Sound Effects preload
+var audDamage = new Audio('./assets/sounds/damage.wav')
+audDamage.volume = 0.2
 
+//Declare a 'playerInfo' object so that we can track of ALL player information in one place.
+var playerInfo = {
+    name: "",
+    questionNum: 1,
+    repeats: [],
+    typePoints: {
+        water: 0,
+        fire: 0,
+        fighting: 0,
+        grass: 0,
+        flying: 0,
+        psychic: 0,
+        rock: 0,
+        ground: 0,
+        normal: 0,
+        electric: 0
+    }
+}
 console.log("test");
 
 var questions = [
@@ -687,19 +697,102 @@ var questions = [
        },
 ]
 
-//run this whenever you need to delegate points
-var answerQuestion = function (answerIndex, answersArray) {
-    console.log("QUESTION:" + questions[0].question)
-    answersArray[answerIndex].points.forEach(element => {
-        console.log(element);
-    });
+//function that loads a random question
+var loadRandomQuestion = function () {
+    //use the helper function to get a number
+    var num = getRandomIntInclusive(0, questions.length - 1)
+    while (playerInfo.repeats.includes(num.toString())) {
+    num = getRandomIntInclusive(0, questions.length - 1)
+    }
+    //set the question text to the random question
+    $("#question").text(questions[num].question)
+
+    //store our question num
+    $("#question").attr("data-num", num)
+
+    //Set each answer
+    $("#btn-1").text(questions[num].answers[0].answer)
+    $("#btn-2").text(questions[num].answers[1].answer)
+    $("#btn-3").text(questions[num].answers[2].answer)
+    $("#btn-4").text(questions[num].answers[3].answer)
 }
 
+//helper function that gets a random integer between two numbers
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+}
+
+//when the start button is clicked do this stuff
+$("#start").on("click", function (e) {
+
+    //prevent form submission
+    e.preventDefault();
+
+    //reset the player info
+    playerInfo = {
+        name: "",
+        questionNum: 1,
+        repeats: [],
+        typePoints: {
+            water: 0,
+            fire: 0,
+            fighting: 0,
+            grass: 0,
+            flying: 0,
+            psychic: 0,
+            rock: 0,
+            ground: 0,
+            normal: 0,
+            electric: 0
+        }
+    }
+
+    //set the playerInfo name to what they typed
+    console.log($("#userName").val());
+    playerInfo.name = $("#userName").val();
+
+    //remove the start container
+    startContainer.detach();
+
+    //add the question container
+    mainWindow.append(questionContainer);
+
+    //start playing the music
+    myAudio.currentTime = 1;
+    myAudio.volume = 0.2;
+    myAudio.play();
+    
+
+    //run the loadRandomQuestion function
+    loadRandomQuestion();
+})
 
 
+//When an answer is clicked
+questionContainer.on("click", "button", function (e) {
+    //get which question we answered
+    var num = $("#question").attr("data-num");
+    //get which answer we picked
+    var ans = this.getAttribute("data-answer");
 
-// A bunch of tests on pulling data from the array
-console.log("QUESTION 1:" + questions[17].question);
+    //log out which question was clicked and what answer was picked
+    console.log("Quesiton " + num + " Answer: " + ans)
 
-answerQuestion(1, questions[0].answers)
-answerQuestion(1, questions[1].answers)
+    //play the damage noise
+    audDamage.currentTime = 0;
+    audDamage.play()
+
+    playerInfo.repeats.push(num);
+    console.log(playerInfo.repeats);
+
+    //add the points to playerInfo by looping through the answer's points types
+    questions[num].answers[ans - 1].points.forEach(element => {
+        Object.keys(element).forEach(key => {
+            console.log(key + "+" + element[key]); //print out what element had what amount of points added to it.
+            playerInfo.typePoints[key] += element[key];
+        })
+    });
+});
+
