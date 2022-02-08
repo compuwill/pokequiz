@@ -187,7 +187,7 @@ var questions = [
         },
         {
             answer: "Finding my true love 💖",
-            points: [{ "fairy": 3, "flying": 1, "bug": 2 }]
+            points: [{ "fairy": 3, "flying": 1, "bug": 2, "normal": 1 }]
         },
         {
             answer: "Leading a fulfilling life 👤",
@@ -320,7 +320,7 @@ var questions = [
         answers: [
             {
                 answer: "🗻 Mountains",
-                points: [{ "rock": 1, "ground": 1, "ghost": 1 }]
+                points: [{ "rock": 1, "ground": 1, "ghost": 1, "dragon": 1 }]
             },
             {
                 answer: "🏐 The Beach",
@@ -411,11 +411,11 @@ var questions = [
                 points: [{ "normal": 1, "water": 1, "grass": 1, "ground": 1 }]
             },
             {
-                answer: "Lead and start community of zombie fighting civilians",
+                answer: "Lead and start a community of zombie fighting civilians",
                 points: [{ "fire": 1, "dragon": 1, "steel": 1, "ice": 1 }]
             },
             {
-                answer: "Live in the forest far away from it all.",
+                answer: "Live in the forest, far away from it all.",
                 points: [{ "grass": 2, "bug": 1, "flying": 1 }]
             }
         ]
@@ -459,6 +459,48 @@ var questions = [
             {
                 answer: "Friends? What's that? 😢",
                 points: [{ "water": 1, "fairy": 1, "bug": 1, "rock": 1, "ground": 1 }]
+            }
+        ]
+    },
+    {
+        question: "Which fantasy theme most appeals to you?",
+        answers: [
+            {
+                answer: "Medieval times with wizards, kings, and castles.",
+                points: [{ "dragon": 2, "grass": 1, "rock": 1, "fairy": 1 , "flying": 1 }]
+            },
+            {
+                answer: "Steampunk with retrofuturistic steam powered machinery.",
+                points: [{ "fire": 1, "steel": 1, "ground": 1, "fighting": 1 }]
+            },
+            {
+                answer: "Futuristic with flying cars, robots, and lasers.",
+                points: [{ "electric": 2, "psychic": 1, "steel": 1}]
+            },
+            {
+                answer: "I don't want to live in a fantasy world.",
+                points: [{ "normal": 2, "fairy": 1, "dark": 1 }]
+            }
+        ]
+    },
+    {
+        question: "Which of these fantasy characters most appeals to you?",
+        answers: [
+            {
+                answer: "🧙‍♂️ Mage / Witch / Warlock / Wizard",
+                points: [{ "dragon": 1, "water": 1, "dark": 1, "fairy": 1 }]
+            },
+            {
+                answer: "🤺 Knight / Fighter / Barbarian / Tank",
+                points: [{ "fighting": 1, "rock": 1, "steel": 1 }]
+            },
+            {
+                answer: "🏹 Rogue / Ranger / Thief / Druid",
+                points: [{ "dark": 2, "grass": 1, "flying": 1, "poison": 1}]
+            },
+            {
+                answer: "🪕 Bard / Cleric / Paladin / Healer",
+                points: [{ "fairy": 1, "psychic": 1, "water": 1}]
             }
         ]
     },
