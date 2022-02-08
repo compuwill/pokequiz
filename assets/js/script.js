@@ -796,12 +796,12 @@ questionContainer.on("click", "button", function (e) {
     });
 
     //load another random question if we have done less than 10 questions
-    if (playerInfo.questionNum < 10) {
+    if (playerInfo.questionNum < 12) {
         loadRandomQuestion();
         //increment the questionNum
         playerInfo.questionNum++;
     }
-    else //once we've answered 10 questions end the quiz
+    else //once we've answered 12 questions end the quiz
     {
         //stop the music
         myAudio.pause();
@@ -828,6 +828,34 @@ var checkType = function () {
             type = key;
         }
     })
+
+    //pull all of the pokemon for that type from the pokemon API
+     fetch('https://pokeapi.co/api/v2/type/'+type)
+     .then(response => response.json())
+     .then(data => {
+        //generate a random number from the amount of pokemon returned from the api
+        var randomPokemon = getRandomIntInclusive(0,data.pokemon.length)
+        //get the pokemon name
+        var pokemonName = data.pokemon[randomPokemon].pokemon.name;
+        //get the pokemon url
+        var pokemonURL = data.pokemon[randomPokemon].pokemon.url;
+
+         //set the pokemon name
+         $("#pokemon").text(pokemonName);
+
+         //get the image by making another API call
+         fetch('https://pokeapi.co/api/v2/type/'+type)
+         .then(response => response.json())
+         .then(data => {
+
+         });
+
+
+         console.log(data);    
+     });
+
+     
+
     //set the type.text on the page
     $("#type").text(type);
 }
@@ -840,6 +868,6 @@ $("#end").on("click", function (e) {
     mainWindow.append(startContainer);
 })
 
-//Remove all other containers in the beginning (detach does not remove assignments)
+//Remove all other containers in the beginning (detach() does not remove assignments whereas remove() does )
 questionContainer.detach();
 endContainer.detach();
