@@ -44,7 +44,6 @@ var playerInfo = {
         electric: 0
     }
 }
-console.log("test");
 
 var questions = [
     {
@@ -750,7 +749,6 @@ $("#start").on("click", function (e) {
     }
 
     //set the playerInfo name to what they typed
-    console.log($("#userName").val());
     playerInfo.name = $("#userName").val();
 
     //remove the start container
@@ -784,13 +782,11 @@ questionContainer.on("click", "button", function (e) {
     audDamage.currentTime = 0;
     audDamage.play()
 
-    playerInfo.repeats.push(num);
-    console.log(playerInfo.repeats);
+    playerInfo.repeats.push(num);;
 
     //add the points to playerInfo by looping through the answer's points types
     questions[num].answers[ans - 1].points.forEach(element => {
         Object.keys(element).forEach(key => {
-            console.log(key + "+" + element[key]); //print out what element had what amount of points added to it.
             playerInfo.typePoints[key] += element[key];
         })
     });
