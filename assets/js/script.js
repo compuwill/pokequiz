@@ -772,7 +772,6 @@ $("#start").on("click", function (e) {
     loadRandomQuestion();
 })
 
-
 //When an answer is clicked
 questionContainer.on("click", "button", function (e) {
     //get which question we answered
@@ -796,9 +795,6 @@ questionContainer.on("click", "button", function (e) {
         })
     });
 
-    //print the type points so we can see what our points are at
-    console.log(playerInfo.typePoints);
-
     //load another random question if we have done less than 10 questions
     if (playerInfo.questionNum < 10) {
         loadRandomQuestion();
@@ -816,9 +812,7 @@ questionContainer.on("click", "button", function (e) {
         //run the checkType function (see below)
         checkType();
     }
-
 });
-
 
 // function that checks which type has the most points
 var checkType = function () {
@@ -845,7 +839,6 @@ $("#end").on("click", function (e) {
     //add back in the start container
     mainWindow.append(startContainer);
 })
-
 
 //Remove all other containers in the beginning (detach does not remove assignments)
 questionContainer.detach();
