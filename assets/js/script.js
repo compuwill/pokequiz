@@ -7,16 +7,20 @@
 // Be responsive.
 // Have a polished UI.
 
-//declare the containers so that we can reference them later
-var mainWindow = $("main")
-var startContainer = $("#startContainer")
-var questionContainer = $("#questionContainer")
-var endContainer = $("#endContainer")
-
-
 //Music Preload
-var audMusic = new Audio('./assets/audio/Pokemon Red, Yellow, Blue Battle Music- Trainer_360P - Copy.mp4')
-audMusic.volume = 0.2
+var myAudio = document.getElementById("myAudio");
+var isPlaying = false;
+
+function togglePlay() {
+  isPlaying ? myAudio.pause() : myAudio.play();
+};
+
+myAudio.onplaying = function() {
+  isPlaying = true;
+};
+myAudio.onpause = function() {
+  isPlaying = false;
+};
 
 //Sound Effects preload
 var audDamage = new Audio('./assets/sounds/damage.wav')
@@ -40,8 +44,8 @@ var playerInfo = {
         electric: 0
     }
 }
+console.log("test");
 
-//The question object array
 var questions = [
     {
         question: "In front of you is a thug threatening to take your money. What do you do?",
@@ -87,7 +91,7 @@ var questions = [
         question: "Which would you rather eat?",
         answers: [{
             answer: "Ice cream",
-            points: [{ "water": 1, "normal": 1 }]
+            points: [{ "water": 1, "normal": 1}]
         },
         {
             answer: "Cheeseburger",
@@ -229,7 +233,7 @@ var questions = [
             }
         ]
     },
-    { //10
+    {
         question: "What is your dream job?",
         answers: [
             {
@@ -439,7 +443,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "If you could start over, which profession would you choose?",
         answers: [
             {
@@ -460,7 +464,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "Your personality is?",
         answers: [
             {
@@ -481,7 +485,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "Favorite family member?",
         answers: [
             {
@@ -502,7 +506,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "Favorite kind of pizza?",
         answers: [
             {
@@ -523,7 +527,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "Favorite type of car?",
         answers: [
             {
@@ -544,7 +548,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "Favorite sport?",
         answers: [
             {
@@ -565,7 +569,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "What would be your perfect date would be?",
         answers: [
             {
@@ -586,8 +590,8 @@ var questions = [
             }
         ]
     },
-    {
-        question: "What’s your favorite school subject?",
+ {
+        question: "What's your favorite school subject?",
         answers: [
             {
                 answer: "Math",
@@ -607,7 +611,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "What do you value most?",
         answers: [
             {
@@ -628,8 +632,8 @@ var questions = [
             }
         ]
     },
-    {
-        question: "What’s one thing you can’t leave the house without?",
+ {
+        question: "What's one thing you can't leave the house without?",
         answers: [
             {
                 answer: "Phone",
@@ -649,8 +653,8 @@ var questions = [
             }
         ]
     },
-    {
-        question: "What’s your favorite season?",
+ {
+        question: "What's your favorite season?",
         answers: [
             {
                 answer: "Spring",
@@ -670,7 +674,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "Favorite type of music?",
         answers: [
             {
@@ -689,8 +693,8 @@ var questions = [
                 answer: "Pop",
                 points: [{ "fire": 1 }]
             }
-        ]
-    },
+          ]
+       },
 ]
 
 //function that loads a random question
@@ -756,8 +760,10 @@ $("#start").on("click", function (e) {
     mainWindow.append(questionContainer);
 
     //start playing the music
-    audMusic.currentTime = 1;
-    audMusic.play();
+    myAudio.currentTime = 1;
+    myAudio.volume = 0.2;
+    myAudio.play();
+    
 
     //run the loadRandomQuestion function
     loadRandomQuestion();
@@ -788,58 +794,5 @@ questionContainer.on("click", "button", function (e) {
             playerInfo.typePoints[key] += element[key];
         })
     });
+});
 
-    //print the type points so we can see what our points are at
-    console.log(playerInfo.typePoints);
-
-    //load another random question if we have done less than 10 questions
-    if (playerInfo.questionNum < 10) {
-        loadRandomQuestion();
-        //increment the questionNum
-        playerInfo.questionNum++;
-    }
-    else //once we've answered 10 questions end the quiz
-    {
-        //stop the music
-        audMusic.pause();
-        //remove the question container
-        questionContainer.detach();
-        //add the end container
-        mainWindow.append(endContainer);
-        //run the checkType function (see below)
-        checkType();
-    }
-
-})
-
-
-// function that checks which type has the most points
-var checkType = function () {
-    //declare the variables and their defaults
-    var type = "normal";
-    var maxPoints = 0;
-
-    //loop through each type
-    Object.keys(playerInfo.typePoints).forEach(key => {
-        //compare the type to maxPoints. if its greater than maxPoints set maxPoints to it and set the type.
-        if (playerInfo.typePoints[key] > maxPoints) {
-            maxPoints = playerInfo.typePoints[key];
-            type = key;
-        }
-    })
-    //set the type.text on the page
-    $("#type").text(type);
-}
-
-//set up what happens when the end button is clicked
-$("#end").on("click", function (e) {
-    //remove the end quiz container
-    endContainer.detach();
-    //add back in the start container
-    mainWindow.append(startContainer);
-})
-
-
-//Remove all other containers in the beginning (detach does not remove assignments)
-questionContainer.detach();
-endContainer.detach();
