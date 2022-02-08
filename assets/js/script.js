@@ -7,21 +7,20 @@
 // Be responsive.
 // Have a polished UI.
 
-//declare the containers so that we can reference them later
-var mainWindow = $("main")
-var startContainer = $("#startContainer")
-var questionContainer = $("#questionContainer")
-var endContainer = $("#endContainer")
-
-
 //Music Preload
-var audMusic = new Audio('./assets/audio/Pokemon Red, Yellow, Blue Battle Music- Trainer_360P - Copy.mp4')
-audMusic.volume = 0.5
+var myAudio = document.getElementById("myAudio");
+var isPlaying = false;
 
-//Sound Effects preload
-var audDamage = new Audio('./assets/sounds/damage.wav')
-audDamage.volume = 0.5
+function togglePlay() {
+  isPlaying ? myAudio.pause() : myAudio.play();
+};
 
+myAudio.onplaying = function() {
+  isPlaying = true;
+};
+myAudio.onpause = function() {
+  isPlaying = false;
+};
 //global point values
 var water = 0;
 var fire = 0;
@@ -34,25 +33,9 @@ var ground = 0;
 var normal = 0;
 var electric = 0;
 
-//Declare a 'playerInfo' object so that we can track of ALL player information in one place.
-var playerInfo = {
-    name: "",
-    questionNum: 1,
-    typePoints: {
-        water: 0,
-        fire: 0,
-        fighting: 0,
-        grass: 0,
-        flying: 0,
-        psychic: 0,
-        rock: 0,
-        ground: 0,
-        normal: 0,
-        electric: 0
-    }
-}
 
-//The question object array
+console.log("test");
+
 var questions = [
     {
         question: "In front of you is a thug threatening to take your money. What do you do?",
@@ -98,7 +81,7 @@ var questions = [
         question: "Which would you rather eat?",
         answers: [{
             answer: "Ice cream",
-            points: [{ "water": 1, "normal": 1 }]
+            points: [{ "water": 1, "normal": 1}]
         },
         {
             answer: "Cheeseburger",
@@ -240,7 +223,7 @@ var questions = [
             }
         ]
     },
-    { //10
+    {
         question: "What is your dream job?",
         answers: [
             {
@@ -450,7 +433,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "If you could start over, which profession would you choose?",
         answers: [
             {
@@ -471,7 +454,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "Your personality is?",
         answers: [
             {
@@ -492,7 +475,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "Favorite family member?",
         answers: [
             {
@@ -513,7 +496,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "Favorite kind of pizza?",
         answers: [
             {
@@ -534,7 +517,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "Favorite type of car?",
         answers: [
             {
@@ -555,7 +538,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "Favorite sport?",
         answers: [
             {
@@ -576,7 +559,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "What would be your perfect date would be?",
         answers: [
             {
@@ -597,8 +580,8 @@ var questions = [
             }
         ]
     },
-    {
-        question: "What’s your favorite school subject?",
+ {
+        question: "What's your favorite school subject?",
         answers: [
             {
                 answer: "Math",
@@ -618,7 +601,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "What do you value most?",
         answers: [
             {
@@ -639,8 +622,8 @@ var questions = [
             }
         ]
     },
-    {
-        question: "What’s one thing you can’t leave the house without?",
+ {
+        question: "What's one thing you can't leave the house without?",
         answers: [
             {
                 answer: "Phone",
@@ -660,8 +643,8 @@ var questions = [
             }
         ]
     },
-    {
-        question: "What’s your favorite season?",
+ {
+        question: "What's your favorite season?",
         answers: [
             {
                 answer: "Spring",
@@ -681,7 +664,7 @@ var questions = [
             }
         ]
     },
-    {
+ {
         question: "Favorite type of music?",
         answers: [
             {
@@ -700,151 +683,23 @@ var questions = [
                 answer: "Pop",
                 points: [{ "fire": 1 }]
             }
-        ]
-    },
+          ]
+       },
 ]
 
-//function that loads a random question
-var loadRandomQuestion = function () {
-    //use the helper function to get a number
-    var num = getRandomIntInclusive(0, questions.length - 1)
-
-    //set the question text to the random question
-    $("#question").text(questions[num].question)
-
-    //store our question num
-    $("#question").attr("data-num", num)
-
-    //Set each answer
-    $("#btn-1").text(questions[num].answers[0].answer)
-    $("#btn-2").text(questions[num].answers[1].answer)
-    $("#btn-3").text(questions[num].answers[2].answer)
-    $("#btn-4").text(questions[num].answers[3].answer)
-}
-
-//helper function that gets a random integer between two numbers
-function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
-}
-
-//when the start button is clicked do this stuff
-$("#start").on("click", function (e) {
-
-    //prevent form submission
-    e.preventDefault();
-
-    //reset the player info
-    playerInfo = {
-        name: "",
-        questionNum: 1,
-        typePoints: {
-            water: 0,
-            fire: 0,
-            fighting: 0,
-            grass: 0,
-            flying: 0,
-            psychic: 0,
-            rock: 0,
-            ground: 0,
-            normal: 0,
-            electric: 0
-        }
-    }
-
-    //set the playerInfo name to what they typed
-    console.log($("#userName").val());
-    playerInfo.name = $("#userName").val();
-
-    //remove the start container
-    startContainer.detach();
-
-    //add the question container
-    mainWindow.append(questionContainer);
-
-    //start playing the music
-    audMusic.currentTime = 1;
-    audMusic.play();
-
-    //run the loadRandomQuestion function
-    loadRandomQuestion();
-})
-
-
-//When an answer is clicked
-questionContainer.on("click", "button", function (e) {
-    //get which question we answered
-    var num = $("#question").attr("data-num");
-    //get which answer we picked
-    var ans = this.getAttribute("data-answer");
-
-    //log out which question was clicked and what answer was picked
-    console.log("Quesiton " + num + " Answer: " + ans)
-
-    //play the damage noise
-    audDamage.currentTime = 0;
-    audDamage.play()
-
-    //add the points to playerInfo by looping through the answer's points types
-    questions[num].answers[ans - 1].points.forEach(element => {
-        Object.keys(element).forEach(key => {
-            console.log(key + "+" + element[key]); //print out what element had what amount of points added to it.
-            playerInfo.typePoints[key] += element[key];
-        })
+//run this whenever you need to delegate points
+var answerQuestion = function (answerIndex, answersArray) {
+    console.log("QUESTION:" + questions[0].question)
+    answersArray[answerIndex].points.forEach(element => {
+        console.log(element);
     });
-
-    //print the type points so we can see what our points are at
-    console.log(playerInfo.typePoints);
-
-    //load another random question if we have done less than 10 questions
-    if (playerInfo.questionNum < 10) {
-        loadRandomQuestion();
-        //increment the questionNum
-        playerInfo.questionNum++;
-    }
-    else //once we've answered 10 questions end the quiz
-    {
-        //stop the music
-        audMusic.pause();
-        //remove the question container
-        questionContainer.detach();
-        //add the end container
-        mainWindow.append(endContainer);
-        //run the checkType function (see below)
-        checkType();
-    }
-
-})
-
-
-// function that checks which type has the most points
-var checkType = function () {
-    //declare the variables and their defaults
-    var type = "normal";
-    var maxPoints = 0;
-
-    //loop through each type
-    Object.keys(playerInfo.typePoints).forEach(key => {
-        //compare the type to maxPoints. if its greater than maxPoints set maxPoints to it and set the type.
-        if (playerInfo.typePoints[key] > maxPoints) {
-            maxPoints = playerInfo.typePoints[key];
-            type = key;
-        }
-    })
-    //set the type.text on the page
-    $("#type").text(type);
 }
 
-//set up what happens when the end button is clicked
-$("#end").on("click", function (e) {
-    //remove the end quiz container
-    endContainer.detach();
-    //add back in the start container
-    mainWindow.append(startContainer);
-})
 
 
-//Remove all other containers in the beginning (detach does not remove assignments)
-questionContainer.detach();
-endContainer.detach();
+
+// A bunch of tests on pulling data from the array
+console.log("QUESTION 1:" + questions[17].question);
+
+answerQuestion(1, questions[0].answers)
+answerQuestion(1, questions[1].answers)
