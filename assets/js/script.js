@@ -13,19 +13,31 @@ var startContainer = $("#startContainer")
 var questionContainer = $("#questionContainer")
 var endContainer = $("#endContainer")
 
+var pokedexContainer = $("#pokedex-entries")
+
 //Music Preload
 var myAudio = document.getElementById("myAudio");
+myAudio.volume = 0.2;
 var isPlaying = false;
 
 function togglePlay() {
-  isPlaying ? myAudio.pause() : myAudio.play();
+    if (isPlaying == true) {
+        myAudio.pause()
+        //utilize the icon api to change the icon to mute
+        $("#iconapi").attr("src", "https://img.icons8.com/mute")
+    }
+    else {
+        myAudio.play()
+        //utilize the icon api to change the icon to audio
+        $("#iconapi").attr("src", "https://img.icons8.com/audio")
+    }
 };
 
-myAudio.onplaying = function() {
-  isPlaying = true;
+myAudio.onplaying = function () {
+    isPlaying = true;
 };
-myAudio.onpause = function() {
-  isPlaying = false;
+myAudio.onpause = function () {
+    isPlaying = false;
 };
 
 //Sound Effects preload
@@ -96,7 +108,7 @@ var questions = [
         question: "Which would you rather eat?",
         answers: [{
             answer: "Ice cream",
-            points: [{ "water": 1, "normal": 1}]
+            points: [{ "water": 1, "normal": 1 }]
         },
         {
             answer: "Cheeseburger",
@@ -448,7 +460,7 @@ var questions = [
             }
         ]
     },
- {
+    {
         question: "If you could start over, which profession would you choose?",
         answers: [
             {
@@ -469,7 +481,7 @@ var questions = [
             }
         ]
     },
- {
+    {
         question: "Your personality is?",
         answers: [
             {
@@ -490,7 +502,7 @@ var questions = [
             }
         ]
     },
- {
+    {
         question: "Favorite family member?",
         answers: [
             {
@@ -511,7 +523,7 @@ var questions = [
             }
         ]
     },
- {
+    {
         question: "Favorite kind of pizza?",
         answers: [
             {
@@ -532,7 +544,7 @@ var questions = [
             }
         ]
     },
- {
+    {
         question: "Favorite type of car?",
         answers: [
             {
@@ -553,7 +565,7 @@ var questions = [
             }
         ]
     },
- {
+    {
         question: "Favorite sport?",
         answers: [
             {
@@ -574,7 +586,7 @@ var questions = [
             }
         ]
     },
- {
+    {
         question: "What would be your perfect date would be?",
         answers: [
             {
@@ -595,7 +607,7 @@ var questions = [
             }
         ]
     },
- {
+    {
         question: "What's your favorite school subject?",
         answers: [
             {
@@ -616,7 +628,7 @@ var questions = [
             }
         ]
     },
- {
+    {
         question: "What do you value most?",
         answers: [
             {
@@ -637,7 +649,7 @@ var questions = [
             }
         ]
     },
- {
+    {
         question: "What's one thing you can't leave the house without?",
         answers: [
             {
@@ -658,7 +670,7 @@ var questions = [
             }
         ]
     },
- {
+    {
         question: "What's your favorite season?",
         answers: [
             {
@@ -679,7 +691,7 @@ var questions = [
             }
         ]
     },
- {
+    {
         question: "Favorite type of music?",
         answers: [
             {
@@ -698,8 +710,8 @@ var questions = [
                 answer: "Pop",
                 points: [{ "fire": 1 }]
             }
-          ]
-       },
+        ]
+    },
 ]
 
 //function that loads a random question
@@ -707,7 +719,7 @@ var loadRandomQuestion = function () {
     //use the helper function to get a number
     var num = getRandomIntInclusive(0, questions.length - 1)
     while (playerInfo.repeats.includes(num.toString())) {
-    num = getRandomIntInclusive(0, questions.length - 1)
+        num = getRandomIntInclusive(0, questions.length - 1)
     }
     //set the question text to the random question
     $("#question").text(questions[num].question)
@@ -773,8 +785,8 @@ $("#start").on("click", function (e) {
     loadRandomQuestion();
 })
 
-    var loadedName = localStorage.getItem("Player Name");
-    $("#userName").val(loadedName);
+var loadedName = localStorage.getItem("Player Name");
+$("#userName").val(loadedName);
 
 //When an answer is clicked
 questionContainer.on("click", "button", function (e) {
@@ -834,31 +846,66 @@ var checkType = function () {
     })
 
     //pull all of the pokemon for that type from the pokemon API
-     fetch('https://pokeapi.co/api/v2/type/'+type)
-     .then(response => response.json())
-     .then(data => {
-        //generate a random number from the amount of pokemon returned from the api
-        var randomPokemon = getRandomIntInclusive(0,data.pokemon.length)
-        //get the pokemon name
-        var pokemonName = data.pokemon[randomPokemon].pokemon.name;
-        //get the pokemon url
-        var pokemonURL = data.pokemon[randomPokemon].pokemon.url;
+    fetch('https://pokeapi.co/api/v2/type/' + type)
+        .then(response => response.json())
+        .then(data => {
+            //generate a random number from the amount of pokemon returned from the api
+            var randomPokemon = getRandomIntInclusive(0, data.pokemon.length)
+            //get the pokemon name
+            var pokemonName = data.pokemon[randomPokemon].pokemon.name;
+            //get the pokemon url
+            var pokemonURL = data.pokemon[randomPokemon].pokemon.url;
 
-         //set the pokemon name
-         $("#pokemon").text(pokemonName);
+            //set the pokemon name
+            $("#pokemon").text(pokemonName.toUpperCase());
 
-         //get the image by making another API call
-         fetch(pokemonURL)
-         .then(response => response.json())
-         .then(pokemonData => {
-             var pokeImage = pokemonData.sprites.front_default
-        $("#randompokemonimage").attr("src", pokeImage);
-        console.log(pokemonData);   
-         });
-     });    
+            //get the image by making another API call
+            fetch(pokemonURL)
+                .then(response => response.json())
+                .then(pokemonData => {
+                    var pokeImage = pokemonData.sprites.front_default
+                    var speciesURL = pokemonData.species.url
+
+                    $("#randompokemonimage").attr("src", pokeImage);
+
+                    console.log(pokemonData);
+                    pokedexContainer.empty();
+                    //FETCH the species pokedex entries
+                    fetch(speciesURL)
+                        .then(response => response.json())
+                        .then(speciesData => {
+
+                            //create a variable to store pokedex entries to make sure its not the same
+                            var pokeDexEntries = []
+
+                            //for each pokedex entry add it to the pokdex
+                            speciesData.flavor_text_entries.forEach(entry => {
+                                var entryText = entry.flavor_text.replace("\n"," ").replace("\f"," ").trim();
+                                //only create a p element if its in english
+                                if (entry.language.name == "en" && !pokeDexEntries.includes(entryText) && pokeDexEntries.length < 6) {
+
+                                    //create a new p element
+                                    console.log(entry.version.name);
+                                    console.log(entryText);
+
+                                    var text = $("<p>").text(entryText)
+                                    pokedexContainer.append(text);
+
+                                    //push that entry into the checker array
+                                    pokeDexEntries.push(entryText);
+                                }
+                            })
+
+                            $("#randompokemonimage").attr("src", pokeImage);
+
+                            console.log(pokemonData);
+                        });
+
+                });
+        });
 
     //set the type.text on the page
-    $("#type").text(type);
+    $("#type").text(type.toUpperCase());
 }
 
 //set up what happens when the end button is clicked
