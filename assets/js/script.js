@@ -19,12 +19,12 @@ function togglePlay() {
     if (isPlaying == true) {
         myAudio.pause()
         //utilize the icon api to change the icon to mute
-        $("#iconapi").attr("src", "https://img.icons8.com/mute")
+        $("#iconapi").attr("src", "https://img.icons8.com/material/48/FFFFFF/mute")
     }
     else {
         myAudio.play()
         //utilize the icon api to change the icon to audio
-        $("#iconapi").attr("src", "https://img.icons8.com/audio")
+        $("#iconapi").attr("src", "https://img.icons8.com/material/48/FFFFFF/audio")
     }
 };
 

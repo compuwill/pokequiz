@@ -4,6 +4,9 @@ Have you ever what kind of pokemon are you? Well you are in luck. We have made a
 # User Story:
 As a top rated gym leader it is my mission to determine which pokemon I would be in the wild based on my answers given by taking the pokeDEX.
 
+# Link to webpage:
+https://bkrayton815.github.io/pokequiz/
+
 
 # Wireframe
 ![app-wireframe](https://user-images.githubusercontent.com/95259338/151906141-f37cf430-12cf-4d6d-a372-22cdb3493bc1.PNG)
@@ -12,9 +15,8 @@ As a top rated gym leader it is my mission to determine which pokemon I would be
 PokeAPI
 https://pokeapi.co/
 
-Ebay Commerce API
-https://developer.ebay.com/products/commerce
-
+# Second Serverside API
+https://img.icons8.com
 
 # CSS Framework
 Bulma https://bulma.io/

@@ -3,6 +3,16 @@ body {
 	height: 100%;
 }
 
+.title {
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 4px 0 0 #000, 0 -4px 0 #000, 0 4px 0 #000, -4px 0 0 #000;
+}
+
+.navbar {
+    background-color: red;
+    border-bottom: 10px black solid;
+}
+
 #mainWindow {
     min-height: 60%;
     display: flex;
