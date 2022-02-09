@@ -3,6 +3,9 @@ body {
 	height: 100%;
 }
 
+.title {
+    font-family: 'Press Start 2P', cursive;
+}
 #mainWindow {
     min-height: 60%;
     display: flex;
