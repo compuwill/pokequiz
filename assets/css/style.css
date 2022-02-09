@@ -8,7 +8,10 @@ body {
     text-shadow: 4px 0 0 #000, 0 -4px 0 #000, 0 4px 0 #000, -4px 0 0 #000;
 }
 
-.navbar {background-color: red;}
+.navbar {
+    background-color: red;
+    border-bottom: 10px black solid;
+}
 
 #mainWindow {
     min-height: 60%;
