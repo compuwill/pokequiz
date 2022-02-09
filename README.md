@@ -12,10 +12,6 @@ As a top rated gym leader it is my mission to determine which pokemon I would be
 PokeAPI
 https://pokeapi.co/
 
-Ebay Commerce API
-https://developer.ebay.com/products/commerce
-
-
 # CSS Framework
 Bulma https://bulma.io/
 
