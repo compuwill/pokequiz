@@ -1,11 +1,3 @@
-// Use a CSS framework other than Bootstrap.
-// Be deployed to GitHub Pages.
-// Be interactive (i.e., accept and respond to user input).
-// Use at least two server-side APIs.
-// Does not use alerts, confirms, or prompts (use modals).
-// Use client-side storage to store persistent data.
-// Be responsive.
-// Have a polished UI.
 
 //declare the containers so that we can reference them later
 var mainWindow = $("main")
