@@ -27,7 +27,7 @@ https://img.icons8.com
 Bulma https://bulma.io/
 
 # Quiz Structure (Determine what kind of pokemon are you based on these answers):
-40-50 Questions (10-15 shown at a time when starting up the quiz)
+40-50 Questions (Only 12 random questions from the pool are shown per quiz)
   - Multiple Choice Answers - 3-5 Questions
 Randomized
   - Answers selected will link to final results
