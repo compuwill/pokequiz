@@ -6,7 +6,7 @@ As a top rated gym leader it is my mission to determine which pokemon I would be
 
 # Screenshots
 ![image](https://user-images.githubusercontent.com/22924230/153981354-d1e66993-bd61-4c55-ae49-cc56e355ee62.png)
-![image](https://user-images.githubusercontent.com/22924230/153981388-82f0bb19-33d7-4b17-befe-11318808540d.png)
+![image](https://user-images.githubusercontent.com/22924230/160008115-b9ac5108-c1c4-42a1-92e1-1cea85863c3b.png)
 
 
 # Link to webpage:
