@@ -10,7 +10,7 @@ As a top rated gym leader it is my mission to determine which pokemon I would be
 
 
 # Link to webpage:
-https://bkrayton815.github.io/pokequiz/
+https://compuwill.github.io/pokequiz/
 
 
 # Wireframe
