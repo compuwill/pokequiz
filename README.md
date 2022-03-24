@@ -5,7 +5,7 @@ Have you ever what kind of pokemon are you? Well you are in luck. We have made a
 As a top rated gym leader it is my mission to determine which pokemon I would be in the wild based on my answers given by taking the pokeDEX.
 
 # Screenshots
-![image](https://user-images.githubusercontent.com/22924230/153981354-d1e66993-bd61-4c55-ae49-cc56e355ee62.png)
+![image](https://user-images.githubusercontent.com/22924230/160008226-958b918c-96f9-4074-9e32-5857bb7a5e7b.png)
 ![image](https://user-images.githubusercontent.com/22924230/160008115-b9ac5108-c1c4-42a1-92e1-1cea85863c3b.png)
 
 
